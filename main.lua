@@ -1,177 +1,132 @@
-local map
-local mapWidth, mapHeight -- in tiles
-
-local mapX, mapY -- position in tiles, can be fractional
-local speedX, speedY
-
-local tilesDisplayWidth, tilesDisplayHeight -- number of tiles in view
-local zoomX, zoomY
-
-local tilesetImage
-local tileSize -- in pixels
-local tileQuads = {} -- parts of the tileset used for different tiles
-local tilesetSprite
-
-local gamePhase = "menu"
-local logoinc = 0
-
-gui = require("Gspot")
+local gui = require "lib.Gspot"
+local sti = require "lib.sti"
 
 function love.load()
+	setupMenu()
 	setupMap()
-	setupMapView()
-	setupTileset()
-	setupUI()
-	setupMenuGraphics()
 end
 
-function setupMenuGraphics()
-	logo = love.graphics.newImage("logo-green.png")
+function setupMenu()
+	gamePhase = "splash"
+	logoInc = 0
+
+	logo = love.graphics.newImage("assets/ui/logo.png")
 	buttons = {"Start", "Install Gelato", "Other Shit", "(this thing currently doesn't work, press Spacebar to continue"}
 end
 
-
 function setupMap()
-	mapWidth = 60
-	mapHeight = 40
+	map = sti("assets/maps/test.lua")
 
-	map = {}
-	for x=1,mapWidth do
-		map[x] = {}
-		for y=1,mapHeight do
-			map[x][y] = love.math.random(0,3)
+	local layer = map:addCustomLayer("sprites", 4)
+
+	local player
+	for k, object in pairs(map.objects) do
+		if object.name == "player" then
+			player = object
+			break
 		end
 	end
-end
 
-function setupMapView()
-	mapX = 1
-	mapY = 1
-	speedX = 0
-	speedY = 0
-	tilesDisplayWidth = 26
-	tilesDisplayHeight = 20
-	zoomX = 1
-	zoomY = 1
-end
+	local sprite = love.graphics.newImage("assets/sprites/player.png")
+	layer.player = {
+		sprite = sprite,
+		x      = player.x,
+		y      = player.y,
+		ox     = sprite:getWidth() / 2,
+		oy     = sprite:getHeight() / 1.35,
+		speedx = 0,
+		speedy = 0
+	}
 
-function setupTileset()
-	tilesetImage = love.graphics.newImage( "tileset.png" )
-	tilesetImage:setFilter("nearest", "linear") -- fix scaling artifacts
-	tileSize = 32
-
-	-- grass
-	tileQuads[0] = love.graphics.newQuad(0 * tileSize, 20 * tileSize, tileSize, tileSize,
-		tilesetImage:getWidth(), tilesetImage:getHeight())
-	-- kitchen floor tile
-	tileQuads[1] = love.graphics.newQuad(2 * tileSize, 0 * tileSize, tileSize, tileSize,
-		tilesetImage:getWidth(), tilesetImage:getHeight())
-	-- parquet flooring
-	tileQuads[2] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
-		tilesetImage:getWidth(), tilesetImage:getHeight())
-	-- middle of red carpet
-	tileQuads[3] = love.graphics.newQuad(3 * tileSize, 9 * tileSize, tileSize, tileSize,
-		tilesetImage:getWidth(), tilesetImage:getHeight())
-
-	tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
-
-	updateTilesetBatch()
-end
-
-function updateTilesetBatch()
-	tilesetBatch:clear()
-	for x=0, tilesDisplayWidth-1 do
-		for y=0, tilesDisplayHeight-1 do
-			tilesetBatch:add(tileQuads[map[x+math.floor(mapX)][y+math.floor(mapY)]],
-				x*tileSize, y*tileSize)
+	layer.update = function(self, dt)
+		if math.abs(self.player.speedx) < 0.1 then
+			self.player.speedx = 0
 		end
-	end
-	tilesetBatch:flush()
-end
+		if math.abs(self.player.speedy) < 0.1 then
+			self.player.speedy = 0
+		end
 
-function setupUI()
-	bob = love.graphics.newImage("bob.png")
-end
+		if love.keyboard.isDown("w", "up") then
+			self.player.speedy = self.player.speedy - 0.2
+		end
+		if love.keyboard.isDown("s", "down") then
+			self.player.speedy = self.player.speedy + 0.2
+		end
+		if love.keyboard.isDown("a", "left") then
+			self.player.speedx = self.player.speedx - 0.2
+		end
+		if love.keyboard.isDown("d", "right") then
+			self.player.speedx = self.player.speedx + 0.2
+		end
 
-function moveMap(dx, dy)
-	oldMapX = mapX
-	oldMapY = mapY
-	mapX = math.max(math.min(mapX + dx, mapWidth - tilesDisplayWidth), 1)
-	mapY = math.max(math.min(mapY + dy, mapHeight - tilesDisplayHeight), 1)
-	-- only update if we actually moved
-	if math.floor(mapX) ~= math.floor(oldMapX) or math.floor(mapY) ~= math.floor(oldMapY) then
-		updateTilesetBatch()
+		if self.player.speedx > 0 then
+			self.player.speedx = self.player.speedx - 0.1
+		elseif self.player.speedx < 0 then
+			self.player.speedx = self.player.speedx + 0.1
+		end
+		if self.player.speedy > 0 then
+			self.player.speedy = self.player.speedy - 0.1
+		elseif self.player.speedy < 0 then
+			self.player.speedy = self.player.speedy + 0.1
+		end
+
+		self.player.x = self.player.x + self.player.speedx
+		self.player.y = self.player.y + self.player.speedy
 	end
+
+	layer.draw = function(self)
+		love.graphics.draw(
+			self.player.sprite,
+			math.floor(self.player.x),
+			math.floor(self.player.y),
+			0,
+			1,
+			1,
+			self.player.ox,
+			self.player.oy
+		)
+	end
+
+	map:removeLayer("spawn")
 end
 
 function love.update(dt)
-	if math.abs(speedX) < 0.1 then
-		speedX = 0
-	end
-	if math.abs(speedY) < 0.1 then
-		speedY = 0
-	end
-
-	if love.keyboard.isDown("up")  then
-		speedY = speedY - 0.2
-	end
-	if love.keyboard.isDown("down")  then
-		speedY = speedY + 0.2
-	end
-	if love.keyboard.isDown("left")  then
-		speedX = speedX - 0.2
-	end
-	if love.keyboard.isDown("right")  then
-		speedX = speedX + 0.2
-	end
-
-	if speedX > 0 then
-		speedX = speedX - 0.1
-	elseif speedX < 0 then
-		speedX = speedX + 0.1
-	end
-	if speedY > 0 then
-		speedY = speedY - 0.1
-	elseif speedY < 0 then
-		speedY = speedY + 0.1
-	end
-
-	moveMap(speedX * tileSize * dt, speedY * tileSize * dt)
+	map:update(dt)
 	gui:update(dt)
 end
 
 function love.draw()
-	if gamePhase == "initial" then
-		if logoinc < (300 - (logo:getHeight() / 4)) then
-			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), logoinc, 0, .5, .5)
+	local scale = 1
+	local screenWidth  = love.graphics.getWidth()  / scale
+	local screenHeight = love.graphics.getHeight() / scale
+
+	if gamePhase == "splash" then
+		if logoInc < (300 - (logo:getHeight() / 4)) then
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), logoInc, 0, 0.5, 0.5)
 		else
 			love.timer.sleep(1)
 			gamePhase = "menu"
 		end
-		logoinc = logoinc + 1
-	end
-	if gamePhase == "menu" then
+		logoInc = logoInc + 1
+	elseif gamePhase == "menu" then
 		love.graphics.setNewFont(24)
 		for i=1,4 do
 		--	love.graphics.printf(buttons[i],0, 300 + 25*i, 800, "center")
-			local button = gui:button('Start Button '..i, {x = 325, y = 300 + 25*i, w = 128, h = gui.style.unit}) -- a button(label, pos, optional parent) gui.style.unit is a standard gui unit (default 16), used to keep the interface tidy
+			local button = gui:button("Start Button "..i, {x = 325, y = 300 + 25*i, w = 128, h = gui.style.unit}) -- a button(label, pos, optional parent) gui.style.unit is a standard gui unit (default 16), used to keep the interface tidy
 			button.click = function(this, x, y) -- set element:click() to make it respond to gui's click event
-				gamePhase = "tiles"
+				gamePhase = "map"
 			end
 		end
 		if love.keyboard.isDown("space") then
-			gamePhase = "tiles"
+			gamePhase = "map"
 		end
 		gui:draw()
-	end
-	if gamePhase == "tiles" then
-		love.graphics.draw(tilesetBatch,
-			math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
-			0, zoomX, zoomY)
-		love.graphics.draw(bob,
-			(love.graphics.getWidth() - bob:getWidth())/2, (love.graphics.getHeight() - bob:getHeight())/2,
-			0, zoomX, zoomY)
-		love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
+	elseif gamePhase == "map" then
+		local player = map.layers["sprites"].player
+		local tx = math.floor(player.x - screenWidth  / 2)
+		local ty = math.floor(player.y - screenHeight / 2)
+
+		map:draw(-tx, -ty, scale, scale)
 	end
 end
 
