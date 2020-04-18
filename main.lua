@@ -12,11 +12,21 @@ local tileSize -- in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 
+local gamePhase = "initial"
+local logoinc = 0
+
 function love.load()
 	setupMap()
 	setupMapView()
 	setupTileset()
+	setupMenuGraphics()
 end
+
+function setupMenuGraphics()
+	logo = love.graphics.newImage("logo-green.png")
+	buttons = {"Start", "Install Gelato", "Other Shit", "(this thing currently doesn't work, press Spacebar to continue"}
+end
+
 
 function setupMap()
 	mapWidth = 60
@@ -123,8 +133,28 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.draw(tilesetBatch,
-		math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
-		0, zoomX, zoomY)
-	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
+	if gamePhase == "initial" then
+		if logoinc < (300 - (logo:getHeight() / 4)) then
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), logoinc, 0, .5, .5)
+		else
+			love.timer.sleep(1)
+			gamePhase = "menu"
+		end
+		logoinc = logoinc + 1
+	end
+	if gamePhase == "menu" then
+		love.graphics.setNewFont(18)
+		for i=1,4 do
+			love.graphics.printf(buttons[i],0, 300 + 25*i, 800, "center")
+		end
+		if love.keyboard.isDown("space") then
+			gamePhase = "tiles"
+		end
+	end
+	if gamePhase == "tiles" then
+		love.graphics.draw(tilesetBatch,
+			math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
+			0, zoomX, zoomY)
+		love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
+	end
 end
