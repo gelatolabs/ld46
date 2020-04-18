@@ -12,8 +12,10 @@ local tileSize -- in pixels
 local tileQuads = {} -- parts of the tileset used for different tiles
 local tilesetSprite
 
-local gamePhase = "initial"
+local gamePhase = "menu"
 local logoinc = 0
+
+gui = require("Gspot")
 
 function love.load()
 	setupMap()
@@ -135,6 +137,7 @@ function love.update(dt)
 	end
 
 	moveMap(speedX * tileSize * dt, speedY * tileSize * dt)
+	gui:update(dt)
 end
 
 function love.draw()
@@ -148,13 +151,18 @@ function love.draw()
 		logoinc = logoinc + 1
 	end
 	if gamePhase == "menu" then
-		love.graphics.setNewFont(18)
+		love.graphics.setNewFont(24)
 		for i=1,4 do
-			love.graphics.printf(buttons[i],0, 300 + 25*i, 800, "center")
+		--	love.graphics.printf(buttons[i],0, 300 + 25*i, 800, "center")
+			local button = gui:button('Start Button '..i, {x = 325, y = 300 + 25*i, w = 128, h = gui.style.unit}) -- a button(label, pos, optional parent) gui.style.unit is a standard gui unit (default 16), used to keep the interface tidy
+			button.click = function(this, x, y) -- set element:click() to make it respond to gui's click event
+				gamePhase = "tiles"
+			end
 		end
 		if love.keyboard.isDown("space") then
 			gamePhase = "tiles"
 		end
+		gui:draw()
 	end
 	if gamePhase == "tiles" then
 		love.graphics.draw(tilesetBatch,
@@ -165,4 +173,14 @@ function love.draw()
 			0, zoomX, zoomY)
 		love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
 	end
+end
+
+love.mousepressed = function(x, y, button)
+	gui:mousepress(x, y, button) -- pretty sure you want to register mouse events
+end
+love.mousereleased = function(x, y, button)
+	gui:mouserelease(x, y, button)
+end
+love.wheelmoved = function(x, y)
+	gui:mousewheel(x, y)
 end
