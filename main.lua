@@ -4,6 +4,7 @@ local sti = require "lib.sti"
 function love.load()
 	setupMenu()
 	setupMap()
+	setupSound()
 end
 
 function setupMenu()
@@ -90,6 +91,22 @@ function setupMap()
 	map:removeLayer("spawn")
 end
 
+function setupSound()
+	titleMusic1 = love.audio.newSource("assets/music/title-intro.ogg", "stream")
+	titleMusic2 = love.audio.newSource("assets/music/title-loop.ogg", "stream")	
+	
+	titleMusic1:play()
+	currentMusic = "titlemusic1"
+end
+	
+function soundManager()
+	if gamePhase == "menu" then
+		if not titleMusic1:isPlaying() and not titleMusic2:isPlaying() then
+			titleMusic2:play()
+		end
+	end
+end
+
 function love.update(dt)
 	map:update(dt)
 	gui:update(dt)
@@ -128,6 +145,7 @@ function love.draw()
 
 		map:draw(-tx, -ty, scale, scale)
 	end
+	soundManager()
 end
 
 love.mousepressed = function(x, y, button)
