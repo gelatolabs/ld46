@@ -16,6 +16,7 @@ function love.load()
 	setupMap()
 	setupMapView()
 	setupTileset()
+	setupUI()
 end
 
 function setupMap()
@@ -76,6 +77,10 @@ function updateTilesetBatch()
 	tilesetBatch:flush()
 end
 
+function setupUI()
+	bob = love.graphics.newImage("bob.png")
+end
+
 function moveMap(dx, dy)
 	oldMapX = mapX
 	oldMapY = mapY
@@ -125,6 +130,9 @@ end
 function love.draw()
 	love.graphics.draw(tilesetBatch,
 		math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
+		0, zoomX, zoomY)
+	love.graphics.draw(bob,
+		(love.graphics.getWidth() - bob:getWidth())/2, (love.graphics.getHeight() - bob:getHeight())/2,
 		0, zoomX, zoomY)
 	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
 end
