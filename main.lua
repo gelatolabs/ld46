@@ -19,6 +19,7 @@ function love.load()
 	setupMap()
 	setupMapView()
 	setupTileset()
+	setupUI()
 	setupMenuGraphics()
 end
 
@@ -84,6 +85,10 @@ function updateTilesetBatch()
 		end
 	end
 	tilesetBatch:flush()
+end
+
+function setupUI()
+	bob = love.graphics.newImage("bob.png")
 end
 
 function moveMap(dx, dy)
@@ -154,6 +159,9 @@ function love.draw()
 	if gamePhase == "tiles" then
 		love.graphics.draw(tilesetBatch,
 			math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
+			0, zoomX, zoomY)
+		love.graphics.draw(bob,
+			(love.graphics.getWidth() - bob:getWidth())/2, (love.graphics.getHeight() - bob:getHeight())/2,
 			0, zoomX, zoomY)
 		love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
 	end
