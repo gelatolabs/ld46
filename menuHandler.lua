@@ -16,7 +16,7 @@ function menuDraw()
 		end
 	end
 	if love.keyboard.isDown("space") then
-		gamePhase = "map"
+		--gamePhase = "map"
 	end
 	gui:draw()
 end

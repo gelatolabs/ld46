@@ -1,12 +1,12 @@
 local sti = require "lib.sti"
 
-function setupMap()
-	map = sti("assets/maps/test.lua")
+function setupMap(m)
+	map = sti(m)
 
-	local layer = map:addCustomLayer("sprites", 4)
+	local layer = map:addCustomLayer("sprites", #map.layers)
 
 	local player
-	for k, object in pairs(map.objects) do
+	for _, object in pairs(map.objects) do
 		if object.name == "player" then
 			player = object
 			break
@@ -58,6 +58,8 @@ function setupMap()
 
 		self.player.x = self.player.x + self.player.speedx
 		self.player.y = self.player.y + self.player.speedy
+
+		checkEncounters(self.player)
 	end
 
 	layer.draw = function(self)
@@ -74,4 +76,26 @@ function setupMap()
 	end
 
 	map:removeLayer("spawn")
+end
+
+function getLayer(m, n)
+	for _, layer in pairs(m.layers) do
+		if layer.name == n then
+			return layer
+		end
+	end
+end
+
+function checkEncounters(player)
+	for _, object in pairs(getLayer(map, "doors").objects) do
+		print(object.name.." "..player.x.." "..player.sprite:getWidth().." "..object.x.." "..object.width)
+		if player.x+player.sprite:getWidth() >= object.x and
+		   player.x <= object.x+object.width and
+		   player.y+player.sprite:getHeight() >= object.y and
+		   player.y <= object.y+object.height then
+			print("assets/maps/"..object.properties["LeadsTo"]..".lua")
+			setupMap("assets/maps/"..object.properties["LeadsTo"]..".lua")
+			break
+		end
+	end
 end

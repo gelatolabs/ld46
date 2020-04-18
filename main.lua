@@ -8,7 +8,7 @@ gamePhase = "splash"
 
 function love.load()
 	setupMenu()
-	setupMap()
+	setupMap("assets/maps/test.lua")
 	setupSound()
 end
 
@@ -27,6 +27,9 @@ function love.draw()
 			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), logoInc, 0, 0.5, 0.5)
 		else
 			love.timer.sleep(1)
+			gamePhase = "menu"
+		end
+		if love.keyboard.isDown("space") then
 			gamePhase = "menu"
 		end
 		logoInc = logoInc + 1
