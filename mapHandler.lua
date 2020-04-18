@@ -1,4 +1,5 @@
 local sti = require "lib.sti"
+
 function setupMap()
 	map = sti("assets/maps/test.lua")
 

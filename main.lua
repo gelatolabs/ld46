@@ -1,9 +1,8 @@
 local gui = require "lib.Gspot"
-local sti = require "lib.sti"
 
-require("mapHandler")
-require("soundHandler")
-require("menuHandler")
+require "mapHandler"
+require "soundHandler"
+require "menuHandler"
 
 gamePhase = "splash"
 
@@ -11,13 +10,6 @@ function love.load()
 	setupMenu()
 	setupMap()
 	setupSound()
-end
-
-function setupMenu()
-	logoInc = 0
-
-	logo = love.graphics.newImage("assets/ui/logo.png")
-	buttons = {"Start", "Install Gelato", "Other Shit", "(this thing currently doesn't work, press Spacebar to continue"}
 end
 
 function love.update(dt)
