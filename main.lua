@@ -38,7 +38,7 @@ function love.draw()
 	elseif gamePhase == "menu" then
 		menuDraw()
 	elseif gamePhase == "map" then
-		local player = map.layers["sprites"].player
+		local player = map.layers["playerSprite"].player
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 

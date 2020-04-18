@@ -2,13 +2,46 @@ local sti = require "lib.sti"
 local bump = require "lib.bump"
 local bump_debug = require 'lib.bump_debug'
 	
+
+function loadEnemies()
+	enemyLayer = map:addCustomLayer("sprites", #map.layers)
+	for _, object in pairs(getLayer(map, "enemies").objects) do
+		io.write("made enemy")
+		local enemy = object
+		sprite = love.graphics.newImage("assets/sprites/".. object.name ..".png")
+		enemyLayer.enemy = {
+			sprite = sprite,
+			x	   = enemy.x,
+			y	   = enemy.y,
+			ox     = (sprite:getWidth() / 2),
+			oy     = (sprite:getHeight() / 2)
+		}
+		enemyLayer.update = function(self, dt)
+			self.enemy.x = self.enemy.x + math.random(-2,2)
+			self.enemy.y = self.enemy.y + math.random(-2,2)
+		end
+		enemyLayer.draw = function(self)
+			love.graphics.draw(
+				self.enemy.sprite,
+				math.floor(self.enemy.x),
+				math.floor(self.enemy.y),
+				0,
+				1,
+				1,
+				self.enemy.ox,
+				self.enemy.oy
+			)
+		end
+		world:add(enemy, enemy.x, enemy.y, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 2))
+	end
+end
 	
 function setupMap(m)
 	map = sti(m,{"bump"})
 	world = bump.newWorld(32)
 	map:bump_init(world)
 	
-	local layer = map:addCustomLayer("sprites", #map.layers)
+	spriteLayer = map:addCustomLayer("playerSprite", #map.layers)
 	local player
 	for _, object in pairs(map.objects) do
 		if object.name == "player" then
@@ -18,7 +51,7 @@ function setupMap(m)
 	end
 
 	local sprite = love.graphics.newImage("assets/sprites/player.png")
-	layer.player = {
+	spriteLayer.player = {
 		sprite = sprite,
 		x      = player.x,
 		y      = player.y,
@@ -30,7 +63,7 @@ function setupMap(m)
 
 	world:add(player, player.x - 300, player.y - 300, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 2))
 
-	layer.update = function(self, dt)
+	spriteLayer.update = function(self, dt)
 		if math.abs(self.player.speedx) < 0.1 then
 			self.player.speedx = 0
 		end
@@ -75,7 +108,7 @@ function setupMap(m)
 		checkEncounters(self.player)
 	end
 
-	layer.draw = function(self)
+	spriteLayer.draw = function(self)
 		love.graphics.draw(
 			self.player.sprite,
 			math.floor(self.player.x),
@@ -87,6 +120,8 @@ function setupMap(m)
 			self.player.oy
 		)
 	end
+	
+	loadEnemies()
 
 	map:removeLayer("spawn")
 end

@@ -8,8 +8,8 @@ return {
   height = 50,
   tilewidth = 32,
   tileheight = 32,
-  nextlayerid = 8,
-  nextobjectid = 5,
+  nextlayerid = 9,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -556,6 +556,32 @@ return {
           y = 224,
           width = 32,
           height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      id = 8,
+      name = "enemies",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 5,
+          name = "Trump",
+          type = "",
+          shape = "rectangle",
+          x = 621.333,
+          y = 400,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}
