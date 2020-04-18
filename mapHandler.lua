@@ -88,12 +88,10 @@ end
 
 function checkEncounters(player)
 	for _, object in pairs(getLayer(map, "doors").objects) do
-		print(object.name.." "..player.x.." "..player.sprite:getWidth().." "..object.x.." "..object.width)
 		if player.x+player.sprite:getWidth() >= object.x and
 		   player.x <= object.x+object.width and
 		   player.y+player.sprite:getHeight() >= object.y and
 		   player.y <= object.y+object.height then
-			print("assets/maps/"..object.properties["LeadsTo"]..".lua")
 			setupMap("assets/maps/"..object.properties["LeadsTo"]..".lua")
 			break
 		end
