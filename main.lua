@@ -1,84 +1,130 @@
+local map
+local mapWidth, mapHeight -- in tiles
+
+local mapX, mapY -- position in tiles, can be fractional
+local speedX, speedY
+
+local tilesDisplayWidth, tilesDisplayHeight -- number of tiles in view
+local zoomX, zoomY
+
+local tilesetImage
+local tileSize -- in pixels
+local tileQuads = {} -- parts of the tileset used for different tiles
+local tilesetSprite
+
 function love.load()
- x = 0
- y = 0
- yinc = 0
- userxspeed = 0
- useryspeed = 0
- userx = 300
- usery = 200
+	setupMap()
+	setupMapView()
+	setupTileset()
 end
 
-function love.update()
- -- =================== Bouncy box code
-	yinc = yinc + 0.1
-	if x > 800 then
-		x = -200
-	else
-		x = x + 2
-	end
-	y = (240 * math.cos(yinc)) + 200
--- ==================== End Bouncy box code
+function setupMap()
+	mapWidth = 60
+	mapHeight = 40
 
--- ==================== Character Triangle code
+	map = {}
+	for x=1,mapWidth do
+		map[x] = {}
+		for y=1,mapHeight do
+			map[x][y] = love.math.random(0,3)
+		end
+	end
+end
 
--- Shitty ass way of preventing drift of character
-	if math.abs(userxspeed) < 0.1 then
-		userxspeed = 0
+function setupMapView()
+	mapX = 1
+	mapY = 1
+	speedX = 0
+	speedY = 0
+	tilesDisplayWidth = 26
+	tilesDisplayHeight = 20
+	zoomX = 1
+	zoomY = 1
+end
+
+function setupTileset()
+	tilesetImage = love.graphics.newImage( "tileset.png" )
+	tilesetImage:setFilter("nearest", "linear") -- fix scaling artifacts
+	tileSize = 32
+
+	-- grass
+	tileQuads[0] = love.graphics.newQuad(0 * tileSize, 20 * tileSize, tileSize, tileSize,
+		tilesetImage:getWidth(), tilesetImage:getHeight())
+	-- kitchen floor tile
+	tileQuads[1] = love.graphics.newQuad(2 * tileSize, 0 * tileSize, tileSize, tileSize,
+		tilesetImage:getWidth(), tilesetImage:getHeight())
+	-- parquet flooring
+	tileQuads[2] = love.graphics.newQuad(4 * tileSize, 0 * tileSize, tileSize, tileSize,
+		tilesetImage:getWidth(), tilesetImage:getHeight())
+	-- middle of red carpet
+	tileQuads[3] = love.graphics.newQuad(3 * tileSize, 9 * tileSize, tileSize, tileSize,
+		tilesetImage:getWidth(), tilesetImage:getHeight())
+
+	tilesetBatch = love.graphics.newSpriteBatch(tilesetImage, tilesDisplayWidth * tilesDisplayHeight)
+
+	updateTilesetBatch()
+end
+
+function updateTilesetBatch()
+	tilesetBatch:clear()
+	for x=0, tilesDisplayWidth-1 do
+		for y=0, tilesDisplayHeight-1 do
+			tilesetBatch:add(tileQuads[map[x+math.floor(mapX)][y+math.floor(mapY)]],
+				x*tileSize, y*tileSize)
+		end
 	end
-	
-	if math.abs(useryspeed) < 0.1 then
-		useryspeed = 0
+	tilesetBatch:flush()
+end
+
+function moveMap(dx, dy)
+	oldMapX = mapX
+	oldMapY = mapY
+	mapX = math.max(math.min(mapX + dx, mapWidth - tilesDisplayWidth), 1)
+	mapY = math.max(math.min(mapY + dy, mapHeight - tilesDisplayHeight), 1)
+	-- only update if we actually moved
+	if math.floor(mapX) ~= math.floor(oldMapX) or math.floor(mapY) ~= math.floor(oldMapY) then
+		updateTilesetBatch()
 	end
-	
-	
--- Keyboard control code	
-	if love.keyboard.isDown("left") then
-		userxspeed = userxspeed - .2
+end
+
+function love.update(dt)
+	if math.abs(speedX) < 0.1 then
+		speedX = 0
 	end
-	if love.keyboard.isDown("right") then
-		userxspeed = userxspeed + .2
+	if math.abs(speedY) < 0.1 then
+		speedY = 0
 	end
-	if love.keyboard.isDown("up") then
-		useryspeed = useryspeed - .2
+
+	if love.keyboard.isDown("up")  then
+		speedY = speedY - 0.2
 	end
-	if love.keyboard.isDown("down") then
-		useryspeed = useryspeed + .2
+	if love.keyboard.isDown("down")  then
+		speedY = speedY + 0.2
 	end
-	
-	
--- Idle/"friction" effect
-	if userxspeed > 0 then
-		userxspeed = userxspeed - .1
-	elseif userxspeed < 0 then
-		userxspeed = userxspeed + .1
+	if love.keyboard.isDown("left")  then
+		speedX = speedX - 0.2
 	end
-	
-	if useryspeed > 0 then
-		useryspeed = useryspeed - .1
-	elseif useryspeed < 0 then
-		useryspeed = useryspeed + .1
+	if love.keyboard.isDown("right")  then
+		speedX = speedX + 0.2
 	end
-	
--- Character is leaving bounds of screen, put them on opposite side	
-	if userx < -45 then
-		userx = 795
-	elseif userx > 795 then
-		userx = -45
-	else
-		userx = userx + userxspeed
+
+	if speedX > 0 then
+		speedX = speedX - 0.1
+	elseif speedX < 0 then
+		speedX = speedX + 0.1
 	end
-	if usery < -45 then
-		usery = 595
-	elseif usery > 595 then
-		usery = -45
-	else
-		usery = usery + useryspeed
+	if speedY > 0 then
+		speedY = speedY - 0.1
+	elseif speedY < 0 then
+		speedY = speedY + 0.1
 	end
-	usery = usery + useryspeed
-	
+
+	moveMap(speedX * tileSize * dt, speedY * tileSize * dt)
 end
 
 function love.draw()
-	love.graphics.rectangle("line", x,y, 200, 150)
-	love.graphics.polygon("fill", userx, usery, userx + 50, usery, userx + 25, usery + 50)
+	love.graphics.draw(tilesetBatch,
+		math.floor(-zoomX*(mapX%1)*tileSize), math.floor(-zoomY*(mapY%1)*tileSize),
+		0, zoomX, zoomY)
+	love.graphics.print("FPS: "..love.timer.getFPS(), 10, 20)
 end
