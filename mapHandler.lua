@@ -1,28 +1,16 @@
 local sti = require "lib.sti"
 local bump = require "lib.bump"
 local bump_debug = require 'lib.bump_debug'
-
-local function addBlock(x,y,w,h)
-  local block = {x=x,y=y,w=w,h=h}
-  --blocks[#blocks+1] = block
-  world:add(block, x,y,w,h)
-end
-
-function setupMap()
-	map = sti("assets/maps/test.lua",{"bump"})
 	
-	-- Prepare physics world with horizontal and vertical gravity
+	
+function setupMap(m)
+	map = sti(m,{"bump"})
 	world = bump.newWorld(32)
 	map:bump_init(world)
 	
-	-- Prepare collision objects
-	--local collisionMap = map:getCollisionMap("solids")
-	--blocks = createBlocksFromCollisionMap(world, collisionMap, map.tilewidth, map.tileheight)
-	
-	local layer = map:addCustomLayer("sprites", 4)
-
+	local layer = map:addCustomLayer("sprites", #map.layers)
 	local player
-	for k, object in pairs(map.objects) do
+	for _, object in pairs(map.objects) do
 		if object.name == "player" then
 			player = object
 			break
@@ -73,7 +61,7 @@ function setupMap()
 		elseif self.player.speedy < 0 then
 			self.player.speedy = self.player.speedy + 0.1
 		end
-
+		
 		self.player.attx = self.player.x + self.player.speedx
 		self.player.atty = self.player.y + self.player.speedy
 		self.player.x, self.player.y, cols, cols_len = world:move(player, self.player.attx, self.player.atty)
@@ -83,6 +71,8 @@ function setupMap()
 		if not (self.player.atty == self.player.y) then
 			self.player.speedy = 0
 		end
+
+		checkEncounters(self.player)
 	end
 
 	layer.draw = function(self)
@@ -99,4 +89,24 @@ function setupMap()
 	end
 
 	map:removeLayer("spawn")
+end
+
+function getLayer(m, n)
+	for _, layer in pairs(m.layers) do
+		if layer.name == n then
+			return layer
+		end
+	end
+end
+
+function checkEncounters(player)
+	for _, object in pairs(getLayer(map, "doors").objects) do
+		if player.x+player.sprite:getWidth() >= object.x and
+		   player.x <= object.x+object.width and
+		   player.y+player.sprite:getHeight() >= object.y and
+		   player.y <= object.y+object.height then
+			setupMap("assets/maps/"..object.properties["LeadsTo"]..".lua")
+			break
+		end
+	end
 end

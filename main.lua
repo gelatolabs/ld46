@@ -10,7 +10,7 @@ gamePhase = "map"
 
 function love.load()
 	setupMenu()
-	setupMap()
+	setupMap("assets/maps/test.lua")
 	setupSound()
 end
 
@@ -31,6 +31,9 @@ function love.draw()
 			love.timer.sleep(1)
 			gamePhase = "menu"
 		end
+		if love.keyboard.isDown("space") then
+			gamePhase = "menu"
+		end
 		logoInc = logoInc + 1
 	elseif gamePhase == "menu" then
 		menuDraw()
@@ -42,7 +45,7 @@ function love.draw()
 		map:draw(0, 0, scale, scale)
 	end
 	soundManager()
-	map:bump_draw(world)
+	--map:bump_draw(world)
 	--bump_debug.draw(world)
 end
 
