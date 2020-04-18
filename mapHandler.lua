@@ -22,13 +22,13 @@ function setupMap(m)
 		sprite = sprite,
 		x      = player.x,
 		y      = player.y,
-		ox     = sprite:getWidth() / 2,
-		oy     = sprite:getHeight() / 1.35,
+		ox     = (sprite:getWidth() / 2),
+		oy     = (sprite:getHeight() / 2),
 		speedx = 0,
 		speedy = 0
 	}
 
-	world:add(player, player.x, player.y, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 1.35))
+	world:add(player, player.x - 300, player.y - 300, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 2))
 
 	layer.update = function(self, dt)
 		if math.abs(self.player.speedx) < 0.1 then

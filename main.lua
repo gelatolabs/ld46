@@ -42,7 +42,7 @@ function love.draw()
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 
-		map:draw(0, 0, scale, scale)
+		map:draw(-tx, -ty, scale, scale)
 	end
 	soundManager()
 	--map:bump_draw(world)
