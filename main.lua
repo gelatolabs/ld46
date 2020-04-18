@@ -6,7 +6,7 @@ require "mapHandler"
 require "soundHandler"
 require "menuHandler"
 
-gamePhase = "map"
+gamePhase = "splash"
 
 function love.load()
 	setupMenu()
