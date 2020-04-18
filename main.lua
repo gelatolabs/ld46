@@ -1,10 +1,12 @@
 local gui = require "lib.Gspot"
+local bump = require "lib.bump"
+local bump_debug = require 'lib.bump_debug'
 
 require "mapHandler"
 require "soundHandler"
 require "menuHandler"
 
-gamePhase = "splash"
+gamePhase = "map"
 
 function love.load()
 	setupMenu()
@@ -37,9 +39,11 @@ function love.draw()
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 
-		map:draw(-tx, -ty, scale, scale)
+		map:draw(0, 0, scale, scale)
 	end
 	soundManager()
+	map:bump_draw(world)
+	--bump_debug.draw(world)
 end
 
 love.mousepressed = function(x, y, button)
