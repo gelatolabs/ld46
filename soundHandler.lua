@@ -18,9 +18,22 @@ end
 
 function soundManager()
 	if gamePhase == "menu" then
+		if not (currentMusic == "menu") then
+			currentMusic = "menu"
+			love.audio.stop()
+		end
 		if not mapleIntro:isPlaying() and currentMusic == "menu" then
 			mapleIntro:play()
 		end
+	end
+	if gamePhase == "storyline" then
+		if not (currentMusic == "storyline") then
+			currentMusic = "storyline"
+			love.audio.stop()
+		end
+		if not titleMusic1:isPlaying() and currentMusic == "storyline" then
+			titleMusic1:play()
+		end		
 	end
 	if gamePhase == "map" then
 		if not (currentMusic == "mapType") then

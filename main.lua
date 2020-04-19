@@ -19,6 +19,7 @@ function love.load()
 	setupMenu()
 	setupMap("assets/maps/test.lua")
 	setupSound()
+	love.graphics.setNewFont("assets/ui/manrope.ttf",14)
 end
 
 function love.update(dt)
@@ -42,13 +43,13 @@ function love.draw()
 			gamePhase = "menu"
 		end
 		logoInc = logoInc + 1
-	elseif gamePhase == "menu" then
-		menuDraw()
 	elseif gamePhase == "map" then
 		local player = getItem(map.layers["spritesRender"].sprites, "player")
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
+	else
+		menuDraw()
 	end
 	soundManager()
 	--map:bump_draw(world)

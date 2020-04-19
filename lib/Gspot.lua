@@ -12,6 +12,8 @@
 -- Simplify version checking
 local version = love._version_major * 10000 + love._version_minor * 100 + love._version_revision
 
+love.graphics.setNewFont("assets/ui/manrope.ttf",14)
+
 -- Return the position of the first byte of the given UTF-8 char.
 local function utf8char_begin(s, idx)
 	-- Precondition:
@@ -374,6 +376,21 @@ Gspot.add = function(this, element)
 	table.insert(this.elements, element)
 	if element.parent then element.parent:addchild(element) end
 	return element
+end
+
+Gspot.clear = function(this, element)
+	love.graphics.clear()
+	for _, element in pairs(this.elements) do
+		if element.parent then element.parent:remchild(element) end
+		while #element.children > 0 do
+			for i, child in ipairs(element.children) do this:rem(child) end
+		end
+		if element == this.mousein then this.mousein = nil end
+		if element == this.drag then this.drag = nil end
+		if element == this.focus then this:unfocus() end
+	end
+	count = #this.elements
+	for i = 0, count do this.elements[i]=nil end
 end
 
 Gspot.rem = function(this, element)
