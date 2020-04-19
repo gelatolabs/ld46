@@ -279,7 +279,6 @@ dialogue = {
 			},
 		},
 	},
-	},
 	["template"] = {
 		[1] = {
 			["intro"] = "",
