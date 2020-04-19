@@ -1,7 +1,7 @@
 local gui = require "lib.Gspot"
 
 local storyScrollInc = 600
-local aboutScrollInc = 600
+local abootScrollInc = 600
 
 function setupMenu()
 	logoInc = 0
@@ -17,7 +17,7 @@ function buttonSelector(selection)
 	elseif selection == 2 then
 		gamePhase = "storyline"
 	else
-		gamePhase = "about"
+		gamePhase = "aboot"
 	end
 end
 	
@@ -48,7 +48,7 @@ function renderStory()
 		
 		There is, however, rumours, that far in the North, beyond the last igloo, there exists a Great Refrigerator that contains enough food to feed a person for many years.
 		
-		And thus, is where our story begins. With a young Canadian, about to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator.
+		And thus, is where our story begins. With a young Canadian, aboot to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator.
 		
 		Will they succeed and find enough food to survive this apocalypse, or will they be forced to succumb to the sweet, sugary goodness that may very well be this country’s undoing?
 		
@@ -64,7 +64,7 @@ function renderAbout()
 	gui:clear()
 	love.graphics.setColor(1,1,1)
 	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
-	aboutBody = 
+	abootBody = 
 		[[
 		The Other Maple Story
 		A Gelato Labs Production
@@ -100,17 +100,17 @@ function renderAbout()
 		
 		Gspot
 		by trubblegum and Pedro Gimeno Fortea (pgimeno)]]
-	if aboutScrollInc > -1400 and not love.keyboard.isDown("space", "return") then
-		love.graphics.printf(aboutBody, 100, aboutScrollInc ,600, 'center')
-		if (1200 + aboutScrollInc) > 250 then
-			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 1200 + aboutScrollInc, 0, 0.5, 0.5)
+	if abootScrollInc > -1400 and not love.keyboard.isDown("space", "return") then
+		love.graphics.printf(abootBody, 100, abootScrollInc ,600, 'center')
+		if (1200 + abootScrollInc) > 250 then
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 1200 + abootScrollInc, 0, 0.5, 0.5)
 		else
 			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 250, 0, 0.5, 0.5)
 		end
-		aboutScrollInc = aboutScrollInc - 1
+		abootScrollInc = abootScrollInc - 1
 		love.timer.sleep(0.01)
 	else 
-		aboutScrollInc = 600
+		abootScrollInc = 600
 		gamePhase = "menu"
 		menuDraw()
 	end	
@@ -126,7 +126,7 @@ function menuDraw()
 		end
 	elseif gamePhase == "storyline" then
 		renderStory()
-	elseif gamePhase == "about" then
+	elseif gamePhase == "aboot" then
 		renderAbout()
 	end
 	gui:draw()

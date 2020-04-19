@@ -42,7 +42,7 @@ function love.draw()
 		end
 		logoInc = logoInc + 1
 	end
-	if (gamePhase == "menu") or (gamePhase == "storyline") or (gamePhase == "about") then
+	if (gamePhase == "menu") or (gamePhase == "storyline") or (gamePhase == "aboot") then
 		menuDraw()
 	end
 	if gamePhase == "map" then

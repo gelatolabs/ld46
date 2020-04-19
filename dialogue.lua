@@ -267,7 +267,7 @@ dialogue = {
 					},
 					["responses"] = {
 						[1] = "Hey now, those are my kids. Ya can't just go oot and aboot and say those kinds of things!",
-						[2] = "Very kind of you, bud. How about you stop by next Thursday?",
+						[2] = "Very kind of you, bud. How aboot you stop by next Thursday?",
 						[3] = "Oh, no problem at all, bud.",
 					},
 					["outcomes"] = {
