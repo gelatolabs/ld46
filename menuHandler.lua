@@ -1,5 +1,6 @@
 local gui = require "lib.Gspot"
 
+local storyScrollInc = 600
 local aboutScrollInc = 600
 
 function setupMenu()
@@ -36,16 +37,94 @@ function renderStory()
 	gui:clear()
 	love.graphics.setColor(1,1,1)
 	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
-	storyBody = "The year is 2025. Borders between countries are still closed due to the fear of the spread of viral diseases, forcing countries to produce all the things necessary to keep their citizens alive. For some countries, this is not a problem, and life carries on as if nothing has changed. But for other countries, this is proving to be quite the problem indeed. Take Canada for instance. It is a widely known fact that Canada’s only food source it can produce in its barren, snowy wastelands, is Maple Syrup. Their only other possible food sources, such as Moose and Cod, having long since been hunted to extinction. Now, with the fear of a massive obesity epidemic caused by a diet solely consisting of Maple Syrup, citizens are forced to fight one another for what little healthy food remains. There is, however, rumours, that far in the North, beyond the last igloo, there exists a Great Refrigerator that contains enough food to feed a person for many years. And thus, is where our story begins. With a young Canadian, about to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator. Will they succeed and find enough food to survive this apocalypse, or will they be forced to succumb to the sweet, sugary goodness that may very well be this country’s undoing. Only time will tell. Perhaps they will find love, or an old friend out there in the tundra. Maybe a lost relative who will bestow upon them some great wisdom of years past. Or mayhaps a great… Oh, sorry, you probably just want to get to it, right? Yeah, that’s my bad… Anywho, on with the show!"
-	if aboutScrollInc > -1000 and not love.keyboard.isDown("space", "return") then
-		love.graphics.printf(storyBody, 100, aboutScrollInc ,600, 'center')
-		aboutScrollInc = aboutScrollInc - 1
+	storyBody = 
+		[[
+		The year is 2025. 
+		
+		Borders between countries are still closed due to the fear of the spread of viral diseases, forcing countries to produce all the things necessary to keep their citizens alive.
+		
+		For some countries, this is not a problem, and life carries on as if nothing has changed. But for other countries, this is proving to be quite the problem indeed. 
+		
+		Take Canada for instance. It is a widely known fact that Canada’s only food source it can produce in its barren, snowy wastelands, is Maple Syrup. Their only other possible food sources, such as Moose and Cod, having long since been hunted to extinction.
+		
+		Now, with the fear of a massive obesity epidemic caused by a diet solely consisting of Maple Syrup, citizens are forced to fight one another for what little healthy food remains.
+		
+		There is, however, rumours, that far in the North, beyond the last igloo, there exists a Great Refrigerator that contains enough food to feed a person for many years.
+		
+		And thus, is where our story begins. With a young Canadian, about to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator.
+		
+		Will they succeed and find enough food to survive this apocalypse, or will they be forced to succumb to the sweet, sugary goodness that may very well be this country’s undoing?
+		
+		Only time will tell. Perhaps they will find love, or an old friend out there in the tundra. Maybe a lost relative who will bestow upon them some great wisdom of years past. 
+		
+		Or mayhaps a great… Oh, sorry, you probably just want to get to it, right? Yeah, that’s my bad… Anywho, on with the show!
+		]]
+		
+	if storyScrollInc > -1000 and not love.keyboard.isDown("space", "return") then
+		love.graphics.printf(storyBody, 100, storyScrollInc ,600, 'center')
+		storyScrollInc = storyScrollInc - 1
 		love.timer.sleep(0.025)
+	else 
+		storyScrollInc = 600
+		gamePhase = "menu"
+		menuDraw()
+	end
+end
+
+function renderAbout()
+	gui:clear()
+	love.graphics.setColor(1,1,1)
+	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
+	aboutBody = 
+		[[
+		The Other Maple Story
+		A Gelato Labs Production
+		for Ludum Dare 46
+		
+		The Gelato Labs 'G-Team' is:
+		
+		Programming:
+		Kyle 'kfarwell' Farwell
+		Matthew 'fireTwoOneNine' Petry
+		
+		Game Art:
+		Matt 'MTRooster' Rose
+		Lizzie 'Airessy' Parrish
+		
+		Game Logo:
+		Matthew 'fireTwoOneNine' Petry
+		
+		Writing:
+		Matt 'MTRooster' Rose
+		Lizzie 'Airessy' Parrish		
+		
+		
+		"The Other Maple Story" uses:
+		
+		LOVE 11.3 2D framework
+		
+		STI (Simple Tiled Implementation)
+		by Landon Manning (karai17)
+		
+		bump.lua
+		by Enrique García Cota (kikito)
+		
+		Gspot
+		by trubblegum and Pedro Gimeno Fortea (pgimeno)]]
+	if aboutScrollInc > -1400 and not love.keyboard.isDown("space", "return") then
+		love.graphics.printf(aboutBody, 100, aboutScrollInc ,600, 'center')
+		if (1200 + aboutScrollInc) > 250 then
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 1200 + aboutScrollInc, 0, 0.5, 0.5)
+		else
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 250, 0, 0.5, 0.5)
+		end
+		aboutScrollInc = aboutScrollInc - 1
+		love.timer.sleep(0.01)
 	else 
 		aboutScrollInc = 600
 		gamePhase = "menu"
 		menuDraw()
-	end
+	end	
 end
 
 function menuDraw()
@@ -58,7 +137,7 @@ function menuDraw()
 		end
 	elseif gamePhase == "storyline" then
 		renderStory()
-	elseif gamePhase == "about" and not (previousPhase == "about") then
+	elseif gamePhase == "about" then
 		renderAbout()
 	end
 	gui:draw()

@@ -29,7 +29,7 @@ function love.draw()
 	previousPhase = gamePhase
 
 	if gamePhase == "splash" then
-		if logoInc < (300 - (logo:getHeight() / 4)) then
+		if logoInc < (250 - (logo:getHeight() / 4)) then
 			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), logoInc, 0, 0.5, 0.5)
 		else
 			love.timer.sleep(1)

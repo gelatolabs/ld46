@@ -76,9 +76,6 @@ function setupMap(m)
 					speedy = 0
 				end	
 				checkEncounters(sprite)				
-			else
-				sprite.x = sprite.x + math.random(-2,2)
-				sprite.y = sprite.y + math.random(-2,2)
 			end
 		end
 	end
@@ -99,7 +96,6 @@ function setupMap(m)
 	end
 
 	map:removeLayer("sprites")
-	return(currMap)
 end
 
 function checkEncounters(player)
@@ -120,7 +116,6 @@ function checkEncounters(player)
 					love.graphics.printf("You already talked to this person!", 0,700,800, 'center')
 				elseif sprite.properties["Is"] == "door" then
 					level = sprite.properties["LeadsTo"]
-					currMap = setupMap("assets/maps/"..level..".lua")
 				break
 				end
 			end
