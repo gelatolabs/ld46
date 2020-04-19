@@ -28,10 +28,8 @@ function dialogueSelector(selection)
 	else
 		if score >= d["minscore"] then
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["success"], {"Back"})
-			inEncounter = false;
 		else
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["fail"], {"Back"})
-			inEncounter = false;
 		end
 	end
 end
@@ -41,12 +39,13 @@ function dialogueDraw()
 	love.graphics.printf(text, 0, 25, screenWidth, "center")
 	if newDialogue == true then
 		print("drawing new dialogue UI")
-		--gui:clear()
+		gui:clear()
 		for i=1,#buttons do
 			local button = gui:button(buttons[i], {x = (800 - 256) / 2, y = 300 + 50*i, w = 256, h = gui.style.unit * 2})
 			button.click = function(this, x, y)
 				if buttons[i] == "Back" then
 					gamePhase = "map"
+					inEncounter = false;
 				else
 					dialogueSelector(i)
 				end

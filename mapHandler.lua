@@ -26,6 +26,7 @@ function setupMap(m)
 			oy     = img:getHeight() / 2,
 			width  = img:getWidth(),
 			height = img:getHeight(),
+			talkedTo = false;
 			properties = sprite.properties
 		}
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
@@ -109,11 +110,14 @@ function checkEncounters(player)
 			player.y+player.sprite:getHeight() >= sprite.y and
 			player.y <= sprite.y+sprite.height then
 				-- print(sprite.properties["Is"])
-				if sprite.properties["Is"] == "enemy" then
+				if sprite.properties["Is"] == "enemy" and sprite.talkedTo == false then
 					inEncounter = true
 					setupDialogue()
 					gamePhase = "dialogue"
+					sprite.talkedTo = true;
 					break
+				elseif sprite.talkedTo == true then
+					love.graphics.printf("You already talked to this person!", 0,700,800, 'center')
 				elseif sprite.properties["Is"] == "door" then
 					level = sprite.properties["LeadsTo"]
 					currMap = setupMap("assets/maps/"..level..".lua")

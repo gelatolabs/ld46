@@ -50,7 +50,7 @@ end
 
 function menuDraw()
 	love.graphics.setBackgroundColor(0.3,0,0)
-	print("previous is "..previousPhase.." current is "..gamePhase)
+	--print("previous is "..previousPhase.." current is "..gamePhase)
 	if gamePhase == "menu" then
 		love.graphics.draw(gameLogo, 400 - (gameLogo:getWidth() / 4), 25, 0, 0.5, 0.5)
 		if not (previousPhase == "menu") then
