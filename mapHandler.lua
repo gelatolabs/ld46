@@ -1,7 +1,7 @@
 local sti        = require "lib.sti"
 local bump       = require "lib.bump"
 local bump_debug = require "lib.bump_debug"
-	
+
 function setupMap(m)
 	map = sti(m,{"bump"})
 	world = bump.newWorld(32)
@@ -87,16 +87,8 @@ function setupMap(m)
 	map:removeLayer("sprites")
 end
 
-function getLayer(m, n)
-	for _, layer in pairs(m.layers) do
-		if layer.name == n then
-			return layer
-		end
-	end
-end
-
 function checkEncounters(player)
-	for _, object in pairs(getLayer(map, "doors").objects) do
+	for _, object in pairs(getItem(map.layers, "doors").objects) do
 		if player.x+player.sprite:getWidth() >= object.x and
 		   player.x <= object.x+object.width and
 		   player.y+player.sprite:getHeight() >= object.y and

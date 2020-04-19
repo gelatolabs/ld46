@@ -6,6 +6,14 @@ require "mapHandler"
 require "soundHandler"
 require "menuHandler"
 
+function getItem(table, name)
+	for _, item in pairs(table) do
+		if item.name == name then
+			return item
+		end
+	end
+end
+
 function love.load()
 	gamePhase = "splash"
 	setupMenu()
@@ -37,13 +45,10 @@ function love.draw()
 	elseif gamePhase == "menu" then
 		menuDraw()
 	elseif gamePhase == "map" then
-		for _, sprite in pairs(map.layers["spritesRender"].sprites) do
-			if sprite.name == "player" then
-				local tx = math.floor(sprite.x - screenWidth  / 2)
-				local ty = math.floor(sprite.y - screenHeight / 2)
-				map:draw(-tx, -ty, scale, scale)
-			end
-		end
+		local player = getItem(map.layers["spritesRender"].sprites, "player")
+		local tx = math.floor(player.x - screenWidth  / 2)
+		local ty = math.floor(player.y - screenHeight / 2)
+		map:draw(-tx, -ty, scale, scale)
 	end
 	soundManager()
 	--map:bump_draw(world)
