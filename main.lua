@@ -1,14 +1,13 @@
-local gui = require "lib.Gspot"
-local bump = require "lib.bump"
-local bump_debug = require 'lib.bump_debug'
+local gui        = require "lib.Gspot"
+local bump       = require "lib.bump"
+local bump_debug = require "lib.bump_debug"
 
 require "mapHandler"
 require "soundHandler"
 require "menuHandler"
 
-gamePhase = "splash"
-
 function love.load()
+	gamePhase = "splash"
 	setupMenu()
 	setupMap("assets/maps/test.lua")
 	setupSound()
@@ -38,11 +37,13 @@ function love.draw()
 	elseif gamePhase == "menu" then
 		menuDraw()
 	elseif gamePhase == "map" then
-		local player = map.layers["playerSprite"].player
-		local tx = math.floor(player.x - screenWidth  / 2)
-		local ty = math.floor(player.y - screenHeight / 2)
-
-		map:draw(-tx, -ty, scale, scale)
+		for _, sprite in pairs(map.layers["spritesRender"].sprites) do
+			if sprite.name == "player" then
+				local tx = math.floor(sprite.x - screenWidth  / 2)
+				local ty = math.floor(sprite.y - screenHeight / 2)
+				map:draw(-tx, -ty, scale, scale)
+			end
+		end
 	end
 	soundManager()
 	--map:bump_draw(world)

@@ -1,129 +1,90 @@
-local sti = require "lib.sti"
-local bump = require "lib.bump"
-local bump_debug = require 'lib.bump_debug'
-	
-
-function loadEnemies()
-	enemyLayer = map:addCustomLayer("sprites", #map.layers)
-	for _, object in pairs(getLayer(map, "enemies").objects) do
-		io.write("made enemy")
-		local enemy = object
-		sprite = love.graphics.newImage("assets/sprites/".. object.name ..".png")
-		enemyLayer.enemy = {
-			sprite = sprite,
-			x	   = enemy.x,
-			y	   = enemy.y,
-			ox     = (sprite:getWidth() / 2),
-			oy     = (sprite:getHeight() / 2)
-		}
-		enemyLayer.update = function(self, dt)
-			self.enemy.x = self.enemy.x + math.random(-2,2)
-			self.enemy.y = self.enemy.y + math.random(-2,2)
-		end
-		enemyLayer.draw = function(self)
-			love.graphics.draw(
-				self.enemy.sprite,
-				math.floor(self.enemy.x),
-				math.floor(self.enemy.y),
-				0,
-				1,
-				1,
-				self.enemy.ox,
-				self.enemy.oy
-			)
-		end
-		world:add(enemy, enemy.x, enemy.y, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 2))
-	end
-end
+local sti        = require "lib.sti"
+local bump       = require "lib.bump"
+local bump_debug = require "lib.bump_debug"
 	
 function setupMap(m)
 	map = sti(m,{"bump"})
 	world = bump.newWorld(32)
 	map:bump_init(world)
+
+	speedx = 0
+	speedy = 0
 	
-	spriteLayer = map:addCustomLayer("playerSprite", #map.layers)
-	local player
-	for _, object in pairs(map.objects) do
-		if object.name == "player" then
-			player = object
-			break
-		end
+	local layer = map:addCustomLayer("spritesRender", #map.layers)
+	layer.sprites = {}
+	for _, sprite in pairs(map.objects) do
+		local img = love.graphics.newImage("assets/sprites/"..sprite.name..".png")
+		layer.sprites[sprite.id] = {
+			name   = sprite.name,
+			sprite = img,
+			x      = sprite.x,
+			y      = sprite.y,
+			ox     = img:getWidth() / 2,
+			oy     = img:getHeight() / 2
+		}
+		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
 
-	local sprite = love.graphics.newImage("assets/sprites/player.png")
-	spriteLayer.player = {
-		sprite = sprite,
-		x      = player.x,
-		y      = player.y,
-		ox     = (sprite:getWidth() / 2),
-		oy     = (sprite:getHeight() / 2),
-		speedx = 0,
-		speedy = 0
-	}
-
-	world:add(player, player.x - 300, player.y - 300, math.floor(sprite:getWidth() / 2), math.floor(sprite:getHeight() / 2))
-
-	spriteLayer.update = function(self, dt)
-		if math.abs(self.player.speedx) < 0.1 then
-			self.player.speedx = 0
+	layer.update = function(self, dt)
+		if math.abs(speedx) < 0.1 then
+			speedx = 0
 		end
-		if math.abs(self.player.speedy) < 0.1 then
-			self.player.speedy = 0
+		if math.abs(speedy) < 0.1 then
+			speedy = 0
 		end
 
 		if love.keyboard.isDown("w", "up") then
-			self.player.speedy = self.player.speedy - 0.2
+			speedy = speedy - 0.2
 		end
 		if love.keyboard.isDown("s", "down") then
-			self.player.speedy = self.player.speedy + 0.2
+			speedy = speedy + 0.2
 		end
 		if love.keyboard.isDown("a", "left") then
-			self.player.speedx = self.player.speedx - 0.2
+			speedx = speedx - 0.2
 		end
 		if love.keyboard.isDown("d", "right") then
-			self.player.speedx = self.player.speedx + 0.2
+			speedx = speedx + 0.2
 		end
 
-		if self.player.speedx > 0 then
-			self.player.speedx = self.player.speedx - 0.1
-		elseif self.player.speedx < 0 then
-			self.player.speedx = self.player.speedx + 0.1
+		if speedx > 0 then
+			speedx = speedx - 0.1
+		elseif speedx < 0 then
+			speedx = speedx + 0.1
 		end
-		if self.player.speedy > 0 then
-			self.player.speedy = self.player.speedy - 0.1
-		elseif self.player.speedy < 0 then
-			self.player.speedy = self.player.speedy + 0.1
+		if speedy > 0 then
+			speedy = speedy - 0.1
+		elseif speedy < 0 then
+			speedy = speedy + 0.1
 		end
 		
-		self.player.attx = self.player.x + self.player.speedx
-		self.player.atty = self.player.y + self.player.speedy
-		self.player.x, self.player.y, cols, cols_len = world:move(player, self.player.attx, self.player.atty)
-		if not (self.player.attx == self.player.x) then
-			self.player.speedx = 0
+		for _, sprite in pairs(self.sprites) do
+			if sprite.name == "player" then
+				sprite.x = sprite.x + speedx
+				sprite.y = sprite.y + speedy
+				checkEncounters(sprite)
+			else
+				sprite.x = sprite.x + math.random(-2,2)
+				sprite.y = sprite.y + math.random(-2,2)
+			end
 		end
-		if not (self.player.atty == self.player.y) then
-			self.player.speedy = 0
-		end
-
-		checkEncounters(self.player)
 	end
 
-	spriteLayer.draw = function(self)
-		love.graphics.draw(
-			self.player.sprite,
-			math.floor(self.player.x),
-			math.floor(self.player.y),
-			0,
-			1,
-			1,
-			self.player.ox,
-			self.player.oy
-		)
+	layer.draw = function(self)
+		for _, object in pairs(self.sprites) do
+			love.graphics.draw(
+				object.sprite,
+				math.floor(object.x),
+				math.floor(object.y),
+				0,
+				1,
+				1,
+				object.ox,
+				object.oy
+			)
+		end
 	end
-	
-	loadEnemies()
 
-	map:removeLayer("spawn")
+	map:removeLayer("sprites")
 end
 
 function getLayer(m, n)

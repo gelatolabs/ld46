@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 9,
-  nextobjectid = 6,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -538,58 +538,6 @@ return {
     },
     {
       type = "objectgroup",
-      id = 6,
-      name = "spawn",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
-        {
-          id = 1,
-          name = "player",
-          type = "",
-          shape = "rectangle",
-          x = 96,
-          y = 224,
-          width = 32,
-          height = 32,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      id = 8,
-      name = "enemies",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
-        {
-          id = 5,
-          name = "Trump",
-          type = "",
-          shape = "rectangle",
-          x = 621.333,
-          y = 400,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
       id = 7,
       name = "doors",
       visible = true,
@@ -613,6 +561,58 @@ return {
           properties = {
             ["LeadsTo"] = "pizza"
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      id = 8,
+      name = "sprites",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 5,
+          name = "trump",
+          type = "",
+          shape = "rectangle",
+          x = 621.333,
+          y = 400,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 6,
+          name = "trump",
+          type = "",
+          shape = "rectangle",
+          x = 654.667,
+          y = 494.667,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 7,
+          name = "player",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 384,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }
