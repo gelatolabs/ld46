@@ -4,6 +4,7 @@ local bump_debug = require "lib.bump_debug"
 require "lib.gelato"
 require "menuHandler"
 require "mapHandler"
+require "inventoryHandler"
 require "dialogueHandler"
 require "soundHandler"
 
@@ -12,6 +13,7 @@ function love.load()
 	level = "test"
 	setupMenu()
 	currMap = setupMap("assets/maps/"..level..".lua")
+	setupInventory()
 	setupSound()
 	love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
 end
@@ -48,6 +50,7 @@ function love.draw()
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
+		gui:draw()
 	end
 	if gamePhase == "dialogue" then -- dialogue
 		dialogueDraw()
