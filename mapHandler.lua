@@ -11,6 +11,7 @@ function setupMap(m)
 	speedy = 0
 	
 	local layer = map:addCustomLayer("spritesRender", #map.layers)
+	local player = getItem(map.objects, "player")
 	layer.sprites = {}
 	for _, sprite in pairs(map.objects) do
 		local img = love.graphics.newImage("assets/sprites/"..sprite.name..".png")
@@ -57,21 +58,19 @@ function setupMap(m)
 			speedy = speedy + 0.1
 		end
 
-		local player = getItem(self.sprites, "player")
-		player.attx = player.x + speedx
-		player.atty = player.y + speedy
-		player.x, player.y, cols, cols_len = world:move(player, player.attx, player.atty)
-		if not (player.attx == player.x) then
-			speedx = 0
-		end
-		if not (player.atty == player.y) then
-			speedy = 0
-		end
-
-		checkEncounters(sprite)
-		
 		for _, sprite in pairs(self.sprites) do
-			if sprite.name ~= "player" then
+			if sprite.name == "player" then
+				sprite.attx = sprite.x + speedx
+				sprite.atty = sprite.y + speedy
+				sprite.x, sprite.y, cols, cols_len = world:move(player, sprite.attx, sprite.atty)
+				if not (sprite.attx == sprite.x) then
+					speedx = 0
+				end
+				if not (sprite.atty == sprite.y) then
+					speedy = 0
+				end
+				checkEncounters(sprite)
+			else
 				sprite.x = sprite.x + math.random(-2,2)
 				sprite.y = sprite.y + math.random(-2,2)
 			end
