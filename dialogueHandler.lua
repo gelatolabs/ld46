@@ -12,7 +12,6 @@ function setupDialogue()
 end
 
 function nextDialogue(t, b)
-	print(dump(dialogue))
 	newDialogue = true
 	text = t
 	buttons = b
@@ -26,7 +25,9 @@ function dialogueSelector(selection)
 	if ds <= #d["stages"] then
 		nextDialogue(d["stages"][ds-1]["responses"][selection], d["stages"][ds]["options"])
 	else
+		hunger = math.min(hunger + 1, 10)
 		if score >= d["minscore"] then
+			inventoryAdd(d["food"])
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["success"], {"Back"})
 		else
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["fail"], {"Back"})
