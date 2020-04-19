@@ -224,16 +224,23 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="doors">
+ <objectgroup id="8" name="sprites">
+  <object id="5" name="trump" x="621.333" y="400">
+   <properties>
+    <property name="Is" value="enemy"/>
+   </properties>
+  </object>
+  <object id="6" name="trump" x="654.667" y="494.667">
+   <properties>
+    <property name="Is" value="enemy"/>
+   </properties>
+  </object>
+  <object id="7" name="player" x="192" y="384" width="32" height="32"/>
   <object id="4" name="pizzaEntrance" x="254.667" y="572" width="206.667" height="185.333">
    <properties>
+    <property name="Is" value="door"/>
     <property name="LeadsTo" value="pizza"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup id="8" name="sprites">
-  <object id="5" name="trump" x="621.333" y="400"/>
-  <object id="6" name="trump" x="654.667" y="494.667"/>
-  <object id="7" name="player" x="192" y="384" width="32" height="32"/>
  </objectgroup>
 </map>

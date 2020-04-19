@@ -1,25 +1,19 @@
 local gui        = require "lib.Gspot"
 local bump       = require "lib.bump"
 local bump_debug = require "lib.bump_debug"
-
-require "mapHandler"
-require "soundHandler"
+require "lib.gelato"
 require "menuHandler"
-
-function getItem(table, name)
-	for _, item in pairs(table) do
-		if item.name == name then
-			return item
-		end
-	end
-end
+require "mapHandler"
+require "dialogueHandler"
+require "soundHandler"
 
 function love.load()
 	gamePhase = "splash"
+	level = "test"
 	setupMenu()
-	setupMap("assets/maps/test.lua")
+	setupMap("assets/maps/"..level..".lua")
 	setupSound()
-	love.graphics.setNewFont("assets/ui/manrope.ttf",14)
+	love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
 end
 
 function love.update(dt)
@@ -28,9 +22,9 @@ function love.update(dt)
 end
 
 function love.draw()
-	local scale = 1
-	local screenWidth  = love.graphics.getWidth()  / scale
-	local screenHeight = love.graphics.getHeight() / scale
+	scale = 1
+	screenWidth  = love.graphics.getWidth()  / scale
+	screenHeight = love.graphics.getHeight() / scale
 
 	if gamePhase == "splash" then
 		if logoInc < (300 - (logo:getHeight() / 4)) then
@@ -43,13 +37,15 @@ function love.draw()
 			gamePhase = "menu"
 		end
 		logoInc = logoInc + 1
+	elseif gamePhase == "menu" then
+		menuDraw()
 	elseif gamePhase == "map" then
 		local player = getItem(map.layers["spritesRender"].sprites, "player")
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
-	else
-		menuDraw()
+	else -- dialogue
+		dialogueDraw()
 	end
 	soundManager()
 	--map:bump_draw(world)

@@ -538,34 +538,6 @@ return {
     },
     {
       type = "objectgroup",
-      id = 7,
-      name = "doors",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      draworder = "topdown",
-      properties = {},
-      objects = {
-        {
-          id = 4,
-          name = "pizzaEntrance",
-          type = "",
-          shape = "rectangle",
-          x = 254.667,
-          y = 572,
-          width = 206.667,
-          height = 185.333,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["LeadsTo"] = "pizza"
-          }
-        }
-      }
-    },
-    {
-      type = "objectgroup",
       id = 8,
       name = "sprites",
       visible = true,
@@ -586,7 +558,9 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["Is"] = "enemy"
+          }
         },
         {
           id = 6,
@@ -599,7 +573,9 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["Is"] = "enemy"
+          }
         },
         {
           id = 7,
@@ -613,6 +589,22 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        },
+        {
+          id = 4,
+          name = "pizzaEntrance",
+          type = "",
+          shape = "rectangle",
+          x = 254.667,
+          y = 572,
+          width = 206.667,
+          height = 185.333,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["Is"] = "door",
+            ["LeadsTo"] = "pizza"
+          }
         }
       }
     }

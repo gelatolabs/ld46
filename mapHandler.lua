@@ -96,13 +96,25 @@ function setupMap(m)
 end
 
 function checkEncounters(player)
-	for _, object in pairs(getItem(map.layers, "doors").objects) do
-		if player.x+player.sprite:getWidth() >= object.x and
-		   player.x <= object.x+object.width and
-		   player.y+player.sprite:getHeight() >= object.y and
-		   player.y <= object.y+object.height then
-			setupMap("assets/maps/"..object.properties["LeadsTo"]..".lua")
-			break
+	for _, sprite in pairs(map.objects) do
+		if player.x+player.sprite:getWidth() >= sprite.x and
+		   player.x <= sprite.x+sprite.width and
+		   player.y+player.sprite:getHeight() >= sprite.y and
+		   player.y <= sprite.y+sprite.height then
+			print(sprite.properties["Is"])
+			if sprite.properties["Is"] == "enemy" then
+				gamePhase = "dialogue"
+				break
+			elseif sprite.properties["Is"] == "door" then
+				level = sprite.properties["LeadsTo"]
+				setupMap("assets/maps/"..level..".lua")
+				break
+			end
 		end
+	end
+
+	if love.keyboard.isDown("t") then
+		setupDialogue()
+		gamePhase = "dialogue"
 	end
 end
