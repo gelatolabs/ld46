@@ -10,6 +10,8 @@ function setupMap(m)
 	speedx = 0
 	speedy = 0
 	
+	inEncounter = false
+	
 	local layer = map:addCustomLayer("spritesRender", #map.layers)
 	local player = getItem(map.objects, "player")
 	layer.sprites = {}
@@ -21,7 +23,10 @@ function setupMap(m)
 			x      = sprite.x,
 			y      = sprite.y,
 			ox     = img:getWidth() / 2,
-			oy     = img:getHeight() / 2
+			oy     = img:getHeight() / 2,
+			width  = img:getWidth(),
+			height = img:getHeight(),
+			properties = sprite.properties
 		}
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
@@ -68,8 +73,8 @@ function setupMap(m)
 				end
 				if not (sprite.atty == sprite.y) then
 					speedy = 0
-				end
-				checkEncounters(sprite)
+				end	
+				checkEncounters(sprite)				
 			else
 				sprite.x = sprite.x + math.random(-2,2)
 				sprite.y = sprite.y + math.random(-2,2)
@@ -93,26 +98,30 @@ function setupMap(m)
 	end
 
 	map:removeLayer("sprites")
+	return(currMap)
 end
 
 function checkEncounters(player)
-	for _, sprite in pairs(map.objects) do
-		if player.x+player.sprite:getWidth() >= sprite.x and
-		   player.x <= sprite.x+sprite.width and
-		   player.y+player.sprite:getHeight() >= sprite.y and
-		   player.y <= sprite.y+sprite.height then
-			print(sprite.properties["Is"])
-			if sprite.properties["Is"] == "enemy" then
-				gamePhase = "dialogue"
+	if inEncounter == false then
+		for _, sprite in pairs(map.layers["spritesRender"].sprites) do
+			if player.x+player.sprite:getWidth() >= sprite.x and
+			player.x <= sprite.x+sprite.width and
+			player.y+player.sprite:getHeight() >= sprite.y and
+			player.y <= sprite.y+sprite.height then
+				-- print(sprite.properties["Is"])
+				if sprite.properties["Is"] == "enemy" then
+					inEncounter = true
+					setupDialogue()
+					gamePhase = "dialogue"
+					break
+				elseif sprite.properties["Is"] == "door" then
+					level = sprite.properties["LeadsTo"]
+					currMap = setupMap("assets/maps/"..level..".lua")
 				break
-			elseif sprite.properties["Is"] == "door" then
-				level = sprite.properties["LeadsTo"]
-				setupMap("assets/maps/"..level..".lua")
-				break
+				end
 			end
 		end
 	end
-
 	if love.keyboard.isDown("t") then
 		setupDialogue()
 		gamePhase = "dialogue"

@@ -11,7 +11,7 @@ function love.load()
 	gamePhase = "splash"
 	level = "test"
 	setupMenu()
-	setupMap("assets/maps/"..level..".lua")
+	currMap = setupMap("assets/maps/"..level..".lua")
 	setupSound()
 	love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
 end
@@ -25,6 +25,8 @@ function love.draw()
 	scale = 1
 	screenWidth  = love.graphics.getWidth()  / scale
 	screenHeight = love.graphics.getHeight() / scale
+	
+	previousPhase = gamePhase
 
 	if gamePhase == "splash" then
 		if logoInc < (300 - (logo:getHeight() / 4)) then
@@ -37,14 +39,17 @@ function love.draw()
 			gamePhase = "menu"
 		end
 		logoInc = logoInc + 1
-	elseif gamePhase == "menu" then
+	end
+	if (gamePhase == "menu") or (gamePhase == "storyline") or (gamePhase == "about") then
 		menuDraw()
-	elseif gamePhase == "map" then
+	end
+	if gamePhase == "map" then
 		local player = getItem(map.layers["spritesRender"].sprites, "player")
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
-	else -- dialogue
+	end
+	if gamePhase == "dialogue" then -- dialogue
 		dialogueDraw()
 	end
 	soundManager()

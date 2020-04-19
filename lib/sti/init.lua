@@ -125,6 +125,10 @@ function Map:init(path, plugins, ox, oy)
 	end
 end
 
+function Map:objectList()
+	return self.objects
+end
+
 --- Layers from the group are added to the list
 -- @param layers List of layers
 -- @param layer Layer data
