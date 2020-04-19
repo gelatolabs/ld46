@@ -126,9 +126,9 @@ function checkEncounters(player)
 		gamePhase = "dialogue"
 	end
 	if love.keyboard.isDown("f") then
-		inventoryAdd("test1")
+		inventoryAdd("poutine")
 	end
 	if love.keyboard.isDown("g") then
-		inventoryAdd("test2")
+		inventoryAdd("maplesyrup")
 	end
 end
