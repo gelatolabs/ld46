@@ -25,12 +25,12 @@ dialogue = {
 				},
 				[2] = {
 					["options"] = {
-						[1] = "aaaaaaaa",
-						[2] = "aaaaaaaa",
+						[1] = "apologize",
+						[2] = "explain that their favorite hockey player is bad",
 					},
 					["responses"] = {
-						[1] = "aaaaaaaa",
-						[2] = "aaaaaaaa",
+						[1] = "it's okay, bud",
+						[2] = "You can fuck off, eh, bud?",
 					},
 					["outcomes"] = {
 						[1] = "positive",
@@ -64,16 +64,16 @@ dialogue = {
 				},
 				[2] = {
 					["options"] = {
-						[1] = "aaa",
-						[2] = "aaa",
+						[1] = "tell them they look like a doughhead",
+						[2] = "ask if they want to watch hockey",
 					},
 					["responses"] = {
-						[1] = "aaa",
-						[2] = "aaa",
+						[1] = "That's not nice!",
+						[2] = "Sure thing, bud",
 					},
 					["outcomes"] = {
 						[1] = "negative",
-						[2] = "positive",
+						[2] = "positive",			
 					},
 				},
 			},
