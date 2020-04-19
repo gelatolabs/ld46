@@ -1,3 +1,5 @@
+local gui = require "lib.Gspot"
+
 -- return table item by name (for STI)
 function getItem(table, name)
 	for _, item in pairs(table) do
@@ -19,5 +21,34 @@ function dump(o)
 		return s .. '} '
 	else
 		return tostring(o)
+	end
+end
+
+scrollInc = "notrunning"
+
+function prettyScroller(newText, speed, prevState)
+	--print("prettyscroll running")
+	if scrollInc == "notrunning" then
+		gui:clear()
+		love.graphics.setColor(1,1,1)
+		love.graphics.setBackgroundColor(0,0,0)
+		scrollInc = 600
+		font = love.graphics.setNewFont("assets/ui/manrope.ttf",24)
+		scrollerText = love.graphics.newText(font, "")
+		scrollerText:setf(newText, 600, 'center')
+	else
+		if scrollInc > (-1 * scrollerText:getHeight()) and not love.keyboard.isDown("space", "return") then
+			--love.graphics.printf(aboutBody, 100, aboutScrollInc ,600, 'center')
+			love.graphics.draw(scrollerText, 100, scrollInc, 0, 1, 1)
+
+			scrollInc = scrollInc - 1
+			love.timer.sleep(0.01/speed)
+		else 
+			aboutScrollInc = "notrunning"
+			gamePhase = prevState
+			if gamePhase == "menu" then
+				menuDraw()
+			end
+		end	
 	end
 end
