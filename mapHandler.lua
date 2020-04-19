@@ -125,4 +125,10 @@ function checkEncounters(player)
 		setupDialogue()
 		gamePhase = "dialogue"
 	end
+	if love.keyboard.isDown("f") then
+		inventoryAdd("test1")
+	end
+	if love.keyboard.isDown("g") then
+		inventoryAdd("test2")
+	end
 end
