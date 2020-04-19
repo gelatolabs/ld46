@@ -34,9 +34,6 @@ function renderMainMenuUI()
 end
 
 function renderStory()
-	gui:clear()
-	love.graphics.setColor(1,1,1)
-	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
 	storyBody = 
 		[[
 		The year is 2025. 
@@ -60,15 +57,7 @@ function renderStory()
 		Or mayhaps a great… Oh, sorry, you probably just want to get to it, right? Yeah, that’s my bad… Anywho, on with the show!
 		]]
 		
-	if storyScrollInc > -1000 and not love.keyboard.isDown("space", "return") then
-		love.graphics.printf(storyBody, 100, storyScrollInc ,600, 'center')
-		storyScrollInc = storyScrollInc - 1
-		love.timer.sleep(0.025)
-	else 
-		storyScrollInc = 600
-		gamePhase = "menu"
-		menuDraw()
-	end
+	prettyScroller(storyBody, 2, "menu")
 end
 
 function renderAbout()
@@ -128,9 +117,9 @@ function renderAbout()
 end
 
 function menuDraw()
-	love.graphics.setBackgroundColor(0.3,0,0)
 	--print("previous is "..previousPhase.." current is "..gamePhase)
 	if gamePhase == "menu" then
+		love.graphics.setBackgroundColor(0.3,0,0)
 		love.graphics.draw(gameLogo, 400 - (gameLogo:getWidth() / 4), 25, 0, 0.5, 0.5)
 		if not (previousPhase == "menu") then
 			renderMainMenuUI()
