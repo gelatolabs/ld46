@@ -169,6 +169,7 @@ dialogue = {
 			["success"] = "You know what, you seem like a good fella, have some timbits!",
 			["fail"] = "This should literally be unreachable, if you're seeing this then something went wrong. Like how did this even happen???",
 			["minscore"] = 1,
+			["food"] = "timbits",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -213,6 +214,7 @@ dialogue = {
 			["success"] = "Thanks for stopping to chat, bud. Have some poutine.",
 			["fail"] = "Can you quit bothering me, ya hoser? Can't ya see I'm busy.",
 			["minscore"] = 1,
+			["food"] = "poutine",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -222,7 +224,7 @@ dialogue = {
 					},
 					["responses"] = {
 						[1] = "Oh, no problem at all, bud.",
-						[2] = "You dare insult Delila, bud? ",
+						[2] = "You dare insult Delila, bud? Best watch your mouth there.",
 						[3] = "That's a pretty impressive call you got there, bud.",
 					},
 					["outcomes"] = {
@@ -250,6 +252,33 @@ dialogue = {
 				},
 			},
 		},
+		[2] = {
+			["intro"] = "Man, looks like I have just enough food for my poor starving family. Better get back to them. Oh, hey there bud, did you need something?",
+			["success"] = "You know, I was going to give this to my poor starving children, but I think you should have it.",
+			["fail"] = "Kids these days, don't got any manners.",
+			["minscore"] = 1,
+			["food"] = "timbits",
+			["stages"] = {
+				[1] = {
+					["options"] = {
+						[1] = "Insult their children",
+						[2] = "Offer to teach their children their ABCs",
+						[3] = "Apologize",
+					},
+					["responses"] = {
+						[1] = "Hey now, those are my kids. Ya can't just go oot and aboot and say those kinds of things!",
+						[2] = "Very kind of you, bud. How about you stop by next Thursday?",
+						[3] = "Oh, no problem at all, bud.",
+					},
+					["outcomes"] = {
+						[1] = "negative",
+						[2] = "positive",
+						[3] = "positive",
+					},
+				},
+			},
+		},
+	},
 	},
 	["template"] = {
 		[1] = {
@@ -257,6 +286,7 @@ dialogue = {
 			["success"] = "",
 			["fail"] = "",
 			["minscore"] = 1,
+			["food"] = "",
 			["stages"] = {
 				[1] = {
 					["options"] = {
