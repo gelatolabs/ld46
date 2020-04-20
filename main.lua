@@ -94,11 +94,13 @@ function love.draw()
 		dialogueDraw()
 	end
 	if gamePhase == "gameover" then
-		if bmi > 26.5 then
+		if bmi >= 26.5 then
 			love.audio.play(love.audio.newSource("assets/sounds/heartattack.wav", "stream"))
 			prettyScroller("Game Over\n\nYou had a heart attack.", 1.5, "quit")
-		else
+		elseif hunger >= 10 then
 			prettyScroller("Game Over\n\nYou starved to death.", 1.5, "quit")
+		else
+			prettyScroller("Game Over\n\nThe fridge is empty. You die of starvation.\n\nCongratulations!", 1.5, "quit")
 		end
 	end
 	soundManager()

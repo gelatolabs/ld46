@@ -38,6 +38,8 @@ function setupMap(m)
 		narration = "Oh hey, look at that person over there, they’ve got tons of food! I’m sure they’d be more than happy to share some with you. Go over and talk to them."
 	elseif level == "level1" then
 		narration = ""
+	elseif level == "level6" then
+		narration = "Oh hey, you finally made it? Wait, did you walk all the way here? Wow, good for you, that must have been a ton of work. I just took the train, was really nice, great picturesque views. Anyway, here it is the Great Refrigerator, go forward and claim your prize!"
 	end
 
 	layer.update = function(self, dt)
@@ -179,6 +181,8 @@ function checkEncounters(player)
 				elseif sprite.name == "backpack" and not backpacked == true then
 					narration = "Backpack get! Now you can store all the food!"
 					backpacked = true
+				elseif sprite.name == "fridge" then
+					gamePhase = "gameover"
 				end
 			end
 		end
