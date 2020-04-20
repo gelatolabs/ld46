@@ -63,7 +63,7 @@ end
 function renderAbout()
 	gui:clear()
 	love.graphics.setColor(1,1,1)
-	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
+	font24 = love.graphics.setNewFont("assets/ui/manrope.ttf",24)
 	abootBody = 
 		[[
 The Other Maple Story

@@ -33,7 +33,7 @@ function prettyScroller(newText, speed, prevState)
 		love.graphics.setColor(1,1,1)
 		love.graphics.setBackgroundColor(0,0,0)
 		scrollInc = 600
-		font = love.graphics.setNewFont("assets/ui/manrope.ttf",24)
+		love.graphics.setFont(font24)
 		scrollerText = love.graphics.newText(font, "")
 		scrollerText:setf(newText, 600, 'center')
 	else

@@ -15,7 +15,9 @@ function love.load()
 	currMap = setupMap("assets/maps/"..level..".lua")
 	setupInventory()
 	setupSound()
-	love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
+	font10 = love.graphics.newFont("assets/ui/manrope.ttf", 10)
+	font14 = love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
+	font24 = love.graphics.newFont("assets/ui/manrope.ttf",24)
 end
 
 function love.update(dt)
