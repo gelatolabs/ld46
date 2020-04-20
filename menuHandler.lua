@@ -77,8 +77,6 @@ Matthew 'fireTwoOneNine' Petry
 Game Art:
 Matt 'MTRooster' Rose
 Lizzie 'Airessy' Parrish
-
-Game Logo:
 Matthew 'fireTwoOneNine' Petry
 
 Music and Sound:

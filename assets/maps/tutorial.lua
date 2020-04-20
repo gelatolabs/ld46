@@ -95,7 +95,7 @@ return {
       offsetx = 0,
       offsety = 0,
       properties = {
-        ["collidable"] = false
+        ["collidable"] = true
       },
       encoding = "lua",
       data = {
@@ -142,8 +142,8 @@ return {
           name = "player",
           type = "",
           shape = "rectangle",
-          x = 49.9667,
-          y = 331.113,
+          x = 64,
+          y = 320,
           width = 0,
           height = 0,
           rotation = 0,
@@ -155,15 +155,15 @@ return {
           name = "enemy",
           type = "",
           shape = "rectangle",
-          x = 427.049,
-          y = 209.86,
+          x = 448,
+          y = 192,
           width = 0,
           height = 0,
           rotation = 0,
           visible = true,
           properties = {
-            ["Is"] = "enemy",
-            ["dialogue"] = 1
+            ["Dialogue"] = 1,
+            ["Is"] = "enemy"
           }
         },
         {
@@ -171,10 +171,10 @@ return {
           name = "tutorialDoor",
           type = "",
           shape = "rectangle",
-          x = 750.833,
-          y = 265.823,
+          x = 736,
+          y = 256,
           width = 39.9734,
-          height = 77.948,
+          height = 95.6147,
           rotation = 0,
           visible = true,
           properties = {
@@ -187,8 +187,8 @@ return {
           name = "maplesyrup",
           type = "",
           shape = "rectangle",
-          x = 81.9454,
-          y = 462.358,
+          x = 96,
+          y = 448,
           width = 0,
           height = 0,
           rotation = 0,
@@ -202,8 +202,8 @@ return {
           name = "maplesyrup",
           type = "",
           shape = "rectangle",
-          x = 467.688,
-          y = 113.924,
+          x = 448,
+          y = 128,
           width = 0,
           height = 0,
           rotation = 0,
@@ -217,8 +217,8 @@ return {
           name = "maplesyrup",
           type = "",
           shape = "rectangle",
-          x = 654.897,
-          y = 463.025,
+          x = 640,
+          y = 480,
           width = 0,
           height = 0,
           rotation = 0,
