@@ -55,7 +55,7 @@ Only time will tell. Perhaps they will find love, or an old friend out there in 
 Or mayhaps a great… oh, sorry, you probably just want to get to it, eh? Yeah, that’s my bad… anywho, on with the show!
 		]]
 		
-	prettyScroller(storyBody, 1.5, "menu")
+	prettyScroller(storyBody, 0.69, "menu")
 end
 
 function renderAbout()

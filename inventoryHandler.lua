@@ -13,6 +13,8 @@ function inventoryAdd(item)
 end
 
 function inventoryRemove(idx)
+	love.audio.play(love.audio.newSource("assets/sounds/eatingnoise.wav", "stream"))
+
 	hunger = hunger - 1
 	if inventory[idx] == "Maple syrup" then
 		bmi = bmi + 0.2

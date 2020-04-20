@@ -32,6 +32,7 @@ function dialogueSelector(selection)
 			inventoryAdd(d["food"])
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["success"], {"Back"})
 		else
+			love.audio.play(love.audio.newSource("assets/sounds/battleLose.wav", "stream"))
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["fail"], {"Back"})
 		end
 	end
