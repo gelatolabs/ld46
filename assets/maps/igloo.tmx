@@ -31,6 +31,9 @@
 </data>
  </layer>
  <layer id="2" name="walls" width="25" height="25">
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
 65,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,65,
 63,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,64,
@@ -65,8 +68,8 @@
   <object id="3" name="backpack" x="174.667" y="558"/>
   <object id="4" name="homeDoor" x="774" y="348.667" width="24.6667" height="139.333">
    <properties>
+    <property name="Is" value="door"/>
     <property name="LeadsTo" value="tutorial"/>
-    <property name="is" value="door"/>
    </properties>
   </object>
  </objectgroup>
