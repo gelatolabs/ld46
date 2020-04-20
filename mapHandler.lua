@@ -145,7 +145,7 @@ function checkEncounters(player)
 				elseif sprite.properties["Is"] == "door" then
 					if sprite.name == "homeDoor" then
 						if not clothed == true then
-							narration = "Easy there pal, I get it’s the apocalypse, but we’re not savages. Go put some pants on."
+							narration = "Easy there pal, I get it’s the apocalypse, but we’re not savages. Go put some clothes on."
 							break
 						elseif not backpacked == true then
 							narration = "I think you’re forgetting the whole reason you have to leave the house. You know, food. Go get your backpack so you can hold any food you find along the way."
@@ -163,12 +163,12 @@ function checkEncounters(player)
 					inventoryAdd("Maple syrup")
 					sprite.talkedTo = true;
 					break
-				elseif sprite.name == "clothes" then
-					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Unfortunately, I cannot read."
+				elseif sprite.name == "clothes" and clothed == false then
+					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Too bad I can't read."
 					clothed = true
 					playerSprite = "player"
-				elseif sprite.name == "backpack" then
-					narration = "Backpack get!"
+				elseif sprite.name == "backpack" and backpacked == false then
+					narration = "Backpack get! Now you can store all the food!"
 					backpacked = true
 				end
 			end
