@@ -11,9 +11,6 @@ function setupMap(m)
 	speedy = 0
 	
 	inEncounter = false
-	
-	love.graphics.setBackgroundColor(0.71,0.89,1,1)
-	
 	local layer = map:addCustomLayer("spritesRender", #map.layers)
 	local player = getItem(map.objects, "player")
 	layer.sprites = {}
