@@ -28,6 +28,7 @@ scrollInc = "notrunning"
 
 function prettyScroller(newText, speed, prevState)
 	--print("prettyscroll running")
+	print(scrollInc)
 	if scrollInc == "notrunning" then
 		gui:clear()
 		love.graphics.setColor(1,1,1)
@@ -44,7 +45,7 @@ function prettyScroller(newText, speed, prevState)
 			scrollInc = scrollInc - 1
 			love.timer.sleep(0.01/speed)
 		else 
-			aboutScrollInc = "notrunning"
+			scrollInc = "notrunning"
 			gamePhase = prevState
 			if gamePhase == "menu" then
 				menuDraw()

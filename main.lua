@@ -17,6 +17,7 @@ function love.load()
 	setupSound()
 	font10 = love.graphics.newFont("assets/ui/manrope.ttf", 10)
 	font14 = love.graphics.setNewFont("assets/ui/manrope.ttf", 14)
+	font20 = love.graphics.newFont("assets/ui/manrope.ttf",20)
 	font24 = love.graphics.newFont("assets/ui/manrope.ttf",24)
 end
 
@@ -76,8 +77,8 @@ function love.draw()
 			gui:clear()
 		end
 		local player = getItem(map.layers["spritesRender"].sprites, "player")
-		local tx = math.floor(player.x - screenWidth  / 2)
-		local ty = math.floor(player.y - screenHeight / 2)
+		tx = math.floor(player.x - screenWidth  / 2)
+		ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
 		gui:draw()
 		love.graphics.setFont(font24)

@@ -40,16 +40,21 @@ end
 	
 function dialogueDraw()
 	love.graphics.draw(bg, 0, 0)
+	love.graphics.setFont(font24)
 	love.graphics.printf(text, 0, 25, screenWidth, "center")
 	if newDialogue == true then
 		print("drawing new dialogue UI")
 		gui:clear()
 		for i=1,#buttons do
-			local button = gui:button(buttons[i], {x = (800 - 256) / 2, y = 300 + 50*i, w = 256, h = gui.style.unit * 2})
+			tempText = love.graphics.newText(font20, buttons[i])
+			buttonWidth = tempText:getWidth()+ 40
+			local button = gui:button(buttons[i], {x = (800 - buttonWidth) / 2, y = 300 + 50*i, w = buttonWidth, h = gui.style.unit * 2})
 			button.click = function(this, x, y)
 				if buttons[i] == "Back" then
 					gamePhase = "map"
+					gui:clear()
 					inEncounter = false;
+					inventoryDraw()
 				else
 					dialogueSelector(i)
 				end

@@ -109,7 +109,10 @@ function setupMap(m)
 				object.oy
 			)
 		end
-		love.graphics.printf(narration, 50, screenHeight - 100, screenWidth - 100, 'center')
+		love.graphics.setColor(0.1,0,0,0.5)
+		love.graphics.rectangle("fill", 0, screenHeight - 164 + ty, screenWidth, 164)
+		love.graphics.setColor(1,1,1,1)
+		love.graphics.printf(narration, 50 + tx, screenHeight - 164 + ty, screenWidth - 100, 'center')
 	end
 
 	map:removeLayer("sprites")
