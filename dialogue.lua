@@ -1,175 +1,11 @@
 dialogue = {
-	["test"] = {
-		[1] = {
-			["intro"] = "hey bud",
-			["success"] = "here have some timbits",
-			["fail"] = "get yer own timbits bud",
-			["minscore"] = 1,
-			["food"] = "timbits",
-			["stages"] = {
-				[1] = {
-					["options"] = {
-						[1] = "compliment toque",
-						[2] = "offer to shovel driveway",
-						[3] = "apologize",
-					},
-					["responses"] = {
-						[1] = "thanks bud",
-						[2] = "I'm homeless, asshole, I don't have a driveway",
-						[3] = "don't worry aboot it!",
-					},
-					["outcomes"] = {
-						[1] = "positive",
-						[2] = "negative",
-						[3] = "positive",
-					},
-				},
-				[2] = {
-					["options"] = {
-						[1] = "apologize",
-						[2] = "explain that their favorite hockey player is bad",
-					},
-					["responses"] = {
-						[1] = "it's okay, bud",
-						[2] = "You can fuck off, eh, bud?",
-					},
-					["outcomes"] = {
-						[1] = "positive",
-						[2] = "negative",
-					},
-				},
-			},
-		},
-		[2] = {
-			["intro"] = "hello",
-			["success"] = "here have some poutine",
-			["fail"] = "get yer own poutine bud",
-			["minscore"] = 2,
-			["food"] = "poutine",
-			["stages"] = {
-				[1] = {
-					["options"] = {
-						[1] = "offer to clear driveway with flamethrower",
-						[2] = "compliment plaid",
-						[3] = "apologize",
-					},
-					["responses"] = {
-						[1] = "what are you, some kind of american?",
-						[2] = "thanks bud",
-						[3] = "what for?",
-					},
-					["outcomes"] = {
-						[1] = "negative",
-						[2] = "positive",
-						[3] = "negative",
-					},
-				},
-				[2] = {
-					["options"] = {
-						[1] = "tell them they look like a doughhead",
-						[2] = "ask if they want to watch hockey",
-					},
-					["responses"] = {
-						[1] = "That's not nice!",
-						[2] = "Sure thing, bud",
-					},
-					["outcomes"] = {
-						[1] = "negative",
-						[2] = "positive",			
-					},
-				},
-			},
-		},
-	},
-	["pizza"] = {
-		[1] = {
-			["intro"] = "hey bud",
-			["success"] = "here have some timbits",
-			["fail"] = "get yer own timbits bud",
-			["minscore"] = 1,
-			["food"] = "timbits",
-			["stages"] = {
-				[1] = {
-					["options"] = {
-						[1] = "compliment toque",
-						[2] = "offer to shovel driveway",
-						[3] = "apologize",
-					},
-					["responses"] = {
-						[1] = "thanks bud",
-						[2] = "I'm homeless, asshole, I don't have a driveway",
-						[3] = "don't worry aboot it!",
-					},
-					["outcomes"] = {
-						[1] = "positive",
-						[2] = "negative",
-						[3] = "positive",
-					},
-				},
-				[2] = {
-					["options"] = {
-						[1] = "aaaaaaaa",
-						[2] = "aaaaaaaa",
-					},
-					["responses"] = {
-						[1] = "aaaaaaaa",
-						[2] = "aaaaaaaa",
-					},
-					["outcomes"] = {
-						[1] = "positive",
-						[2] = "negative",
-					},
-				},
-			},
-		},
-		[2] = {
-			["intro"] = "hello",
-			["success"] = "here have some poutine",
-			["fail"] = "get yer own poutine bud",
-			["minscore"] = 2,
-			["food"] = "poutine",
-			["stages"] = {
-				[1] = {
-					["options"] = {
-						[1] = "offer to clear driveway with flamethrower",
-						[2] = "compliment plaid",
-						[3] = "apologize",
-					},
-					["responses"] = {
-						[1] = "what are you, some kind of american?",
-						[2] = "thanks bud",
-						[3] = "what for?",
-					},
-					["outcomes"] = {
-						[1] = "negative",
-						[2] = "positive",
-						[3] = "negative",
-					},
-				},
-				[2] = {
-					["options"] = {
-						[1] = "aaa",
-						[2] = "aaa",
-					},
-					["responses"] = {
-						[1] = "aaa",
-						[2] = "aaa",
-					},
-					["outcomes"] = {
-						[1] = "negative",
-						[2] = "positive",
-					},
-				},
-			},
-		},
-	},
 	["tutorial"] = {
 		[1] = {
 			["intro"] = "Narrator: Alright, now just let's see if you can get some food from this person.",
-			["success"] = "You know what, you seem like a good fella, have some timbits!",
+			["success"] = "You know what, you seem like a good fella, have some Timbits™!",
 			["fail"] = "This should literally be unreachable, if you're seeing this then something went wrong. Like how did this even happen???",
 			["minscore"] = 1,
-			["food"] = "timbits",
+			["food"] = "Timbits™",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -214,7 +50,7 @@ dialogue = {
 			["success"] = "Thanks for stopping to chat, bud. Have some poutine.",
 			["fail"] = "Can you quit bothering me, ya hoser? Can't ya see I'm busy.",
 			["minscore"] = 1,
-			["food"] = "poutine",
+			["food"] = "Poutine",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -257,7 +93,7 @@ dialogue = {
 			["success"] = "You know, I was going to give this to my poor starving children, but I think you should have it.",
 			["fail"] = "Kids these days, don't got any manners.",
 			["minscore"] = 1,
-			["food"] = "timbits",
+			["food"] = "Timbits™",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -285,7 +121,7 @@ dialogue = {
 			["success"] = "You know what bud, have some poutine. A gift, from one ice fishing enthusiast to another.",
 			["fail"] = "Why don't you just go bother someone else, eh?",
 			["minscore"] = 1,
-			["food"] = "poutine",
+			["food"] = "Poutine",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -307,11 +143,11 @@ dialogue = {
 			},
 		},
 		[2] = {
-			["intro"] = "How's it going there bud, you're looking a bit peckish. Say, how about this. If you guess the outcome of this coin flip I'll give ya some timbits. How's that sound, eh?",
-			["success"] = "Well, rules are rules, here's some timbits.",
+			["intro"] = "How's it going there bud, you're looking a bit peckish. Say, how about this. If you guess the outcome of this coin flip I'll give ya some Timbits™. How's that sound, eh?",
+			["success"] = "Well, rules are rules, have some Timbits™.",
 			["fail"] = "Not sure how you screwed this up, bud. This game was literally rigged for you to win and you somehow screwed this up. I got nothin' for ya.",
 			["minscore"] = 1,
-			["food"] = "timbits",
+			["food"] = "Timbits™",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -339,7 +175,7 @@ dialogue = {
 					["responses"] = {
 						[1] = "Well look at that, it's heads!",
 						[2] = "Well look at that, it's tails!",
-						[3] = "What in... It really did land on it's side! Well I'll be darned...",
+						[3] = "What in... it really did land on its side! Well I'll be darned...",
 					},
 					["outcomes"] = {
 						[1] = "positive",
@@ -356,7 +192,7 @@ dialogue = {
 			["success"] = "Here ya go bud, have a slice on the house!",
 			["fail"] = "Get out of my face, ya pineapple-hatin' hoser!",
 			["minscore"] = 1,
-			["food"] = "pizza",
+			["food"] = "Pizza",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -382,7 +218,7 @@ dialogue = {
 			["success"] = "It's always nice to see a welcome face in Pizza Town",
 			["fail"] = "Never show your face in Pizza Town again, ya hoser!",
 			["minscore"] = 1,
-			["food"] = "pizza",
+			["food"] = "Pizza",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -390,7 +226,7 @@ dialogue = {
 						[2] = "Offer to shovel their driveway",
 					},
 					["responses"] = {
-						[1] = "I'm only wearing this too hide my bald head...",
+						[1] = "I'm only wearing this to hide my bald head...",
 						[2] = "I'm homeless, ya hoser, I don't have a driveway! How rude...",
 					},
 					["outcomes"] = {
@@ -418,10 +254,10 @@ dialogue = {
 	["level4"] = {
 		[1] = {
 			["intro"] = "Hey there bud, didn't expect to see someone so far North. Usually they stop in pizza town since they got an infinite supply of pizza. Oh well, ya can't go back now. What can I do for ya?",
-			["success"] = "Well gee, it's sure has been a while since I talked to a nice folk like yourself. Have this poutine.",
+			["success"] = "Well gee, it sure has been a while since I talked to a nice folk like yourself. Have this poutine.",
 			["fail"] = "I don't know about you, bud. Why don't you move along.",
 			["minscore"] = 2,
-			["food"] = "poutine",
+			["food"] = "Poutine",
 			["stages"] = {
 				[1] = {
 					["options"] = {
@@ -432,7 +268,7 @@ dialogue = {
 					["responses"] = {
 						[1] = "I sure would love to, bud. Sadly I left my skates at home, maybe next time.",
 						[2] = "Well that's not very nice, ya hoser.",
-						[3] = "Thanks bud, I just polished her this morning.",
+						[3] = "Thanks bud, I just polished her this morning. Send it!",
 					},
 					["outcomes"] = {
 						[1] = "positive",
@@ -463,10 +299,10 @@ dialogue = {
 	["level5"] = {
 		[1] = {
 			["intro"] = "Another person, I haven't seen another person in months. Are you looking for the Great Refrigerator too? I've just aboot run oot of supplies looking for it. What can I do for ya?",
-			["success"] = "Well, I am almost out of food, and will probably die if I give these to you, but you seem like a nice guy. So here, have these timbits, and good luck!",
+			["success"] = "Well, I am almost out of food, and will probably die if I give these to you, but you seem like a nice guy. So here, have these Timbits™, and good luck!",
 			["fail"] = "Well, I've got nothing for you, but good luck looking for the Great Refrigerator.",
 			["minscore"] = 2,
-			["food"] = "",
+			["food"] = "Timbits™",
 			["stages"] = {
 				[1] = {
 					["options"] = {

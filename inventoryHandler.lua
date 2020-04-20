@@ -33,7 +33,7 @@ function inventoryDraw()
 	gui:clear()
 	love.graphics.setFont(font10)
 	for i, item in pairs(inventory) do
-		local icon = love.graphics.newImage("assets/ui/food/"..item..".png")
+		local icon = love.graphics.newImage("assets/ui/food/"..item:gsub('%W', ''):lower()..".png")
 		local button = gui:imgbutton(nil, {x = icon:getWidth() * i + (i*5), y = screenHeight - icon:getHeight(), w = icon:getWidth(), h = icon:getHeight()}, nil, icon)
 		button.click = function(this, x, y)
 			inventoryRemove(i)
