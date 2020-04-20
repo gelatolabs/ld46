@@ -4,7 +4,6 @@ local gui = require "lib.Gspot"
 function setupInventory()
 	inventory = {}
 	hunger = 0
-	hungerModifier = 0
 	bmi = 20
 end
 

@@ -43,7 +43,6 @@ function dialogueDraw()
 	love.graphics.setFont(font24)
 	love.graphics.printf(text, 0, 25, screenWidth, "center")
 	if newDialogue == true then
-		print("drawing new dialogue UI")
 		gui:clear()
 		for i=1,#buttons do
 			tempText = love.graphics.newText(font20, buttons[i])

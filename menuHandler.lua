@@ -24,13 +24,10 @@ end
 	
 function renderMainMenuUI()
 	for i=1,3 do
-		local button = gui:button(buttons[i], {x = (800 - 256) / 2, y = 300 + 50*i, w = 256, h = gui.style.unit * 2}) -- a button(label, pos, optional parent) gui.style.unit is a standard gui unit (default 16), used to keep the interface tidy
-		button.click = function(this, x, y) -- set element:click() to make it respond to gui's click event
+		local button = gui:button(buttons[i], {x = (800 - 256) / 2, y = 300 + 50*i, w = 256, h = gui.style.unit * 2})
+		button.click = function(this, x, y)
 			buttonSelector(i)
 		end
-	end
-	if love.keyboard.isDown("space") then
-		--gamePhase = "map"
 	end
 end
 
@@ -129,7 +126,6 @@ See documentation for above listed libraries for respective licensing details.
 end
 
 function menuDraw()
-	--print("previous is "..previousPhase.." current is "..gamePhase)
 	if gamePhase == "menu" then
 		love.graphics.setBackgroundColor(0.3,0,0)
 		love.graphics.draw(gameLogo, 400 - (gameLogo:getWidth() / 4), 25, 0, 0.5, 0.5)

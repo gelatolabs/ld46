@@ -74,7 +74,6 @@ function love.draw()
 		end
 
 		if not (previousPhase == "map") then
-			print("cleared")
 			gui:clear()
 		end
 
@@ -92,12 +91,10 @@ function love.draw()
 		dialogueDraw()
 	end
 	soundManager()
-	--map:bump_draw(world)
-	--bump_debug.draw(world)
 end
 
 love.mousepressed = function(x, y, button)
-	gui:mousepress(x, y, button) -- pretty sure you want to register mouse events
+	gui:mousepress(x, y, button)
 end
 love.mousereleased = function(x, y, button)
 	gui:mouserelease(x, y, button)
