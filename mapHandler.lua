@@ -37,8 +37,6 @@ function setupMap(m)
 	elseif level == "tutorial" then
 		narration = "Oh hey, look at that person over there, they’ve got tons of food! I’m sure they’d be more than happy to share some with you. Go over and talk to them."
 	elseif level == "level1" then
-		narration = "Nice going, you’re a natural at this stuff! And look at the delicious food you’ve got now! You can click on your food to eat it. Make sure you eat enough food to avoid starving to death. Wouldn’t want that. You can always eat some Maple Syrup to satiate your hunger, but eating too much Maple Syrup will cause you to gain weight. Gain too much weight and, well, best you just don’t do that. Alright, well, guess I’ll leave you to it. Best of luck, and try not to die!"
-	elseif level == "level2" then
 		narration = ""
 	end
 
@@ -109,10 +107,12 @@ function setupMap(m)
 				object.oy
 			)
 		end
+		local nWidth, nLines = font24:getWrap(narration, screenWidth - 100)
+		local nHeight = (#nLines) * (font24:getHeight() + font24:getLineHeight())
 		love.graphics.setColor(0.1,0,0,0.5)
-		love.graphics.rectangle("fill", 0, screenHeight - 164 + ty, screenWidth, 164)
+		love.graphics.rectangle("fill", 0, screenHeight - nHeight + ty, screenWidth + tx, nHeight)
 		love.graphics.setColor(1,1,1,1)
-		love.graphics.printf(narration, 50 + tx, screenHeight - 164 + ty, screenWidth - 100, 'center')
+		love.graphics.printf(narration, 50 + tx, screenHeight - nHeight + ty, screenWidth - 100, 'center')
 	end
 
 	map:removeLayer("sprites")
@@ -130,6 +130,10 @@ function checkEncounters(player)
 					setupDialogue(sprite.properties["Dialogue"])
 					gamePhase = "dialogue"
 					sprite.talkedTo = true;
+
+					if level == "tutorial" then
+						narration = "Nice going, you’re a natural at this stuff! And look at the delicious food you’ve got now! You can click on your food to eat it. Make sure you eat enough food to avoid starving to death. Wouldn’t want that. You can always eat some Maple Syrup to satiate your hunger, but eating too much Maple Syrup will cause you to gain weight. Gain too much weight and, well, best you just don’t do that. Alright, well, guess I’ll leave you to it. Best of luck, and try not to die!"
+					end
 					break
 				elseif sprite.properties["Is"] == "door" then
 					if sprite.name == "homeDoor" then
@@ -156,6 +160,7 @@ function checkEncounters(player)
 					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Unfortunately, I cannot read."
 					clothed = true
 				elseif sprite.name == "backpack" then
+					narration = "Backpack get!"
 					backpacked = true
 				end
 			end
