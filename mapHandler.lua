@@ -42,16 +42,22 @@ function setupMap(m)
 
 		if love.keyboard.isDown("w", "up") then
 			speedy = speedy - 0.2
+			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("s", "down") then
 			speedy = speedy + 0.2
+			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("a", "left") then
 			speedx = speedx - 0.2
+			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("d", "right") then
 			speedx = speedx + 0.2
+			hunger = hunger + math.random()/200
 		end
+
+		hunger = hunger + math.random()/2000
 
 		if speedx > 0 then
 			speedx = speedx - 0.1

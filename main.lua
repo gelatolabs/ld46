@@ -48,11 +48,20 @@ function love.draw()
 		menuDraw()
 	end
 	if gamePhase == "map" then
+		if not (previousPhase == "map") then
+			print("cleared")
+			gui:clear()
+		end
 		local player = getItem(map.layers["spritesRender"].sprites, "player")
 		local tx = math.floor(player.x - screenWidth  / 2)
 		local ty = math.floor(player.y - screenHeight / 2)
 		map:draw(-tx, -ty, scale, scale)
 		gui:draw()
+		love.graphics.setFont(font24)
+		love.graphics.printf("Hunger: ".. (math.floor(hunger*10))*0.1 .."/10", 25, 25, 600, 'left') 
+		love.graphics.printf("BMI: "..bmi.."/26.5", 25, 50, 600, 'left') 
+		--local hungerText = gui:text("Hunger: "..hunger.."/10", {x = 0, y = 0, w = screenWidth, h = 25})
+		--local bmiText = gui:text("BMI: "..bmi.."/26.5", {x = 0, y = 25, w = screenWidth, h = 25})
 	end
 	if gamePhase == "dialogue" then -- dialogue
 		dialogueDraw()

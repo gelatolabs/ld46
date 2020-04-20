@@ -34,7 +34,7 @@ function prettyScroller(newText, speed, prevState)
 		love.graphics.setBackgroundColor(0,0,0)
 		scrollInc = 600
 		love.graphics.setFont(font24)
-		scrollerText = love.graphics.newText(font, "")
+		scrollerText = love.graphics.newText(font24, "")
 		scrollerText:setf(newText, 600, 'center')
 	else
 		if scrollInc > (-1 * scrollerText:getHeight()) and not love.keyboard.isDown("space", "return") then

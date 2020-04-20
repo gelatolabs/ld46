@@ -13,6 +13,7 @@ end
 
 function buttonSelector(selection)
 	if selection == 1 then
+		gui:clear()
 		gamePhase = "map"
 	elseif selection == 2 then
 		gamePhase = "storyline"
@@ -63,7 +64,7 @@ end
 function renderAbout()
 	gui:clear()
 	love.graphics.setColor(1,1,1)
-	font24 = love.graphics.setNewFont("assets/ui/manrope.ttf",24)
+	love.graphics.setFont(font24)
 	abootBody = 
 		[[
 The Other Maple Story
