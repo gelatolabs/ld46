@@ -25,7 +25,6 @@ function dialogueSelector(selection)
 	if ds <= #d["stages"] then
 		nextDialogue(d["stages"][ds-1]["responses"][selection], d["stages"][ds]["options"])
 	else
-		hunger = hunger + 1
 		if score >= d["minscore"] then
 			if level == "tutorial" then
 				tutorialComplete = true

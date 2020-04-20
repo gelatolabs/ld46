@@ -54,25 +54,24 @@ function setupMap(m)
 		if love.keyboard.isDown("w", "up") then
 			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."n.png")
 			speedy = speedy - 0.2
-			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("s", "down") then
 			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."s.png")
 			speedy = speedy + 0.2
-			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("a", "left") then
 			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."w.png")
 			speedx = speedx - 0.2
-			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("d", "right") then
 			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."e.png")
 			speedx = speedx + 0.2
-			hunger = hunger + math.random()/200
 		end
 
-		hunger = hunger + math.random()/2000
+		hunger = hunger + math.random()/200
+		if hunger >= 10 then
+			gamePhase = "gameover"
+		end
 
 		if speedx > 0 then
 			speedx = speedx - 0.1

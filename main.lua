@@ -84,7 +84,7 @@ function love.draw()
 
 		gui:draw()
 		love.graphics.setFont(font24)
-		love.graphics.printf("Hunger: ".. math.min((math.floor(hunger*10))*0.1, 10) .."/10", 25, 80, 600, 'left')
+		love.graphics.printf("Hunger: ".. math.min(math.floor(hunger), 10) .."/10", 25, 80, 600, 'left')
 		love.graphics.printf("BMI: "..math.min(bmi, 26.5).."/26.5", 25, 105, 600, 'left')
 	end
 	if gamePhase == "dialogue" then
