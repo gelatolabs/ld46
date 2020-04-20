@@ -114,17 +114,21 @@ function checkEncounters(player)
 				-- print(sprite.properties["Is"])
 				if sprite.properties["Is"] == "enemy" and sprite.talkedTo == false then
 					inEncounter = true
-					setupDialogue()
+					setupDialogue(sprite.properties["Dialogue"])
 					gamePhase = "dialogue"
 					sprite.talkedTo = true;
 					break
 				elseif sprite.talkedTo == true then
 					love.graphics.printf("You already talked to this person!", 0,700,800, 'center')
+					break
 				elseif sprite.properties["Is"] == "door" then
-					level = sprite.properties["LeadsTo"]
+					if level ~= "tutorial" or tutorialComplete == true then
+						level = sprite.properties["LeadsTo"]
+						currMap = setupMap("assets/maps/"..level..".lua")
+					end
 					break
 				elseif sprite.properties["Is"] == "maplesyrup" and sprite.talkedTo == false then
-					inventoryAdd("maplesyrup")
+					inventoryAdd("Maple syrup")
 					sprite.talkedTo = true;
 					break
 				end

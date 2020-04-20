@@ -102,6 +102,7 @@
   </object>
   <object id="3" name="trump" x="613.88" y="367.024">
    <properties>
+    <property name="Dialogue" type="int" value="1"/>
     <property name="Is" value="enemy"/>
    </properties>
    <point/>

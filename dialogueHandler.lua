@@ -3,9 +3,9 @@ require "dialogue"
 
 newDialogue = true
 
-function setupDialogue()
+function setupDialogue(dude)
 	bg = love.graphics.newImage("assets/bgs/"..level..".png")
-	d = dialogue[level][math.random(#dialogue[level])]
+	d = dialogue[level][dude]
 	ds = 1
 	score = 0
 	nextDialogue(d["intro"], d["stages"][ds]["options"])
@@ -27,6 +27,9 @@ function dialogueSelector(selection)
 	else
 		hunger = math.min(hunger + 1, 10)
 		if score >= d["minscore"] then
+			if level == "tutorial" then
+				tutorialComplete = true
+			end
 			inventoryAdd(d["food"])
 			nextDialogue(d["stages"][ds-1]["responses"][selection].."\n"..d["success"], {"Back"})
 		else

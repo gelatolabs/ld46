@@ -48,6 +48,26 @@ function love.draw()
 		menuDraw()
 	end
 	if gamePhase == "map" then
+		if love.keyboard.isDown("0") then
+			level = "tutorial"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("1") then
+			level = "level1"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("2") then
+			level = "level2"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("3") then
+			level = "level3"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("4") then
+			level = "level4"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("5") then
+			level = "level5"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		end
+
 		if not (previousPhase == "map") then
 			print("cleared")
 			gui:clear()

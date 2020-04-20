@@ -204,6 +204,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["Dialogue"] = 1,
             ["Is"] = "enemy"
           }
         },

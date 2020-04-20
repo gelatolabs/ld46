@@ -9,13 +9,13 @@ function setupInventory()
 end
 
 function inventoryAdd(item)
-	inventory[#inventory+1] = item:gsub('%W', ''):lower()
+	inventory[#inventory+1] = item
 	inventoryDraw()
 end
 
 function inventoryRemove(idx)
 	hunger = math.max(hunger - 1, 0)
-	if inventory[idx] == "maplesyrup" then
+	if inventory[idx] == "Maple syrup" then
 		bmi = bmi + 0.2
 	end
 
