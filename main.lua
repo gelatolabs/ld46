@@ -84,11 +84,19 @@ function love.draw()
 
 		gui:draw()
 		love.graphics.setFont(font24)
-		love.graphics.printf("Hunger: ".. math.max((math.floor(hunger*10))*0.1, 10) .."/10", 25, 80, 600, 'left') 
-		love.graphics.printf("BMI: "..math.max(bmi, 26.5).."/26.5", 25, 105, 600, 'left') 
+		love.graphics.printf("Hunger: ".. math.min((math.floor(hunger*10))*0.1, 10) .."/10", 25, 80, 600, 'left')
+		love.graphics.printf("BMI: "..math.min(bmi, 26.5).."/26.5", 25, 105, 600, 'left')
 	end
 	if gamePhase == "dialogue" then
 		dialogueDraw()
+	end
+	if gamePhase == "gameover" then
+		if bmi > 26.5 then
+			love.audio.play(love.audio.newSource("assets/sounds/heartattack.wav", "stream"))
+			prettyScroller("Game Over\n\nYou had a heart attack.", 1.5, "quit")
+		else
+			prettyScroller("Game Over\n\nYou starved to death.", 1.5, "quit")
+		end
 	end
 	soundManager()
 end

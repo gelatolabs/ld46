@@ -4,7 +4,7 @@ local gui = require "lib.Gspot"
 function setupInventory()
 	inventory = {}
 	hunger = 0
-	bmi = 20
+	bmi = 30
 end
 
 function inventoryAdd(item)
@@ -16,6 +16,9 @@ function inventoryRemove(idx)
 	hunger = hunger - 1
 	if inventory[idx] == "Maple syrup" then
 		bmi = bmi + 0.2
+		if bmi >= 26.5 then
+			gamePhase = "gameover"
+		end
 	end
 
 	local n = #inventory

@@ -163,11 +163,11 @@ function checkEncounters(player)
 					inventoryAdd("Maple syrup")
 					sprite.talkedTo = true;
 					break
-				elseif sprite.name == "clothes" and clothed == false then
+				elseif sprite.name == "clothes" and not clothed == true then
 					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Too bad I can't read."
 					clothed = true
 					playerSprite = "player"
-				elseif sprite.name == "backpack" and backpacked == false then
+				elseif sprite.name == "backpack" and not backpacked == true then
 					narration = "Backpack get! Now you can store all the food!"
 					backpacked = true
 				end

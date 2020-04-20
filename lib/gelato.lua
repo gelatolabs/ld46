@@ -27,8 +27,6 @@ end
 scrollInc = "notrunning"
 
 function prettyScroller(newText, speed, prevState)
-	--print("prettyscroll running")
-	print(scrollInc)
 	if scrollInc == "notrunning" then
 		gui:clear()
 		love.graphics.setColor(1,1,1)
@@ -38,13 +36,18 @@ function prettyScroller(newText, speed, prevState)
 		scrollerText = love.graphics.newText(font24, "")
 		scrollerText:setf(newText, 600, 'center')
 	else
-		if scrollInc > (-1 * scrollerText:getHeight()) and not love.keyboard.isDown("space", "return") then
-			--love.graphics.printf(aboutBody, 100, aboutScrollInc ,600, 'center')
+		if scrollInc > (-1 * scrollerText:getHeight()) then
 			love.graphics.draw(scrollerText, 100, scrollInc, 0, 1, 1)
 
-			scrollInc = scrollInc - 1
+			if love.keyboard.isDown("space") then
+				scrollInc = scrollInc - 5
+			else
+				scrollInc = scrollInc - 1
+			end
 			love.timer.sleep(0.01/speed)
-		else 
+		elseif prevState == "quit" then
+			love.event.quit(0)
+		else
 			scrollInc = "notrunning"
 			gamePhase = prevState
 			if gamePhase == "menu" then
