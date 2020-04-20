@@ -210,7 +210,7 @@ return {
         },
         {
           id = 4,
-          name = "door",
+          name = "tutorialDoor",
           type = "",
           shape = "rectangle",
           x = 736,

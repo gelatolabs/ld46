@@ -107,7 +107,7 @@
    </properties>
    <point/>
   </object>
-  <object id="4" name="door" x="736" y="320" width="64" height="160">
+  <object id="4" name="tutorialDoor" x="736" y="320" width="64" height="160">
    <properties>
     <property name="Is" value="door"/>
     <property name="LeadsTo" value="level1"/>

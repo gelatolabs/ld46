@@ -10,7 +10,7 @@ require "soundHandler"
 
 function love.load()
 	gamePhase = "splash"
-	level = "tutorial"
+	level = "home"
 	setupMenu()
 	currMap = setupMap("assets/maps/"..level..".lua")
 	setupInventory()
@@ -48,22 +48,25 @@ function love.draw()
 		menuDraw()
 	end
 	if gamePhase == "map" then
-		if love.keyboard.isDown("0") then
-			level = "tutorial"
-			currMap = setupMap("assets/maps/"..level..".lua")
-		elseif love.keyboard.isDown("1") then
-			level = "level1"
+		if love.keyboard.isDown("1") then
+			level = "home"
 			currMap = setupMap("assets/maps/"..level..".lua")
 		elseif love.keyboard.isDown("2") then
-			level = "level2"
+			level = "tutorial"
 			currMap = setupMap("assets/maps/"..level..".lua")
 		elseif love.keyboard.isDown("3") then
-			level = "level3"
+			level = "level1"
 			currMap = setupMap("assets/maps/"..level..".lua")
 		elseif love.keyboard.isDown("4") then
-			level = "level4"
+			level = "level2"
 			currMap = setupMap("assets/maps/"..level..".lua")
 		elseif love.keyboard.isDown("5") then
+			level = "level3"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("6") then
+			level = "level4"
+			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("7") then
 			level = "level5"
 			currMap = setupMap("assets/maps/"..level..".lua")
 		end

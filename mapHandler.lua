@@ -32,6 +32,16 @@ function setupMap(m)
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
 
+	if level == "home" then
+		narration = "Hey look, there you are, all ready to go out on your epic quest. Better put on some clothes and grab your trusty backpack for storing food before you go, you probably won’t be coming back anytime soon."
+	elseif level == "tutorial" then
+		narration = "Oh hey, look at that person over there, they’ve got tons of food! I’m sure they’d be more than happy to share some with you. Go over and talk to them."
+	elseif level == "level1" then
+		narration = "Nice going, you’re a natural at this stuff! And look at the delicious food you’ve got now! You can click on your food to eat it. Make sure you eat enough food to avoid starving to death. Wouldn’t want that. You can always eat some Maple Syrup to satiate your hunger, but eating too much Maple Syrup will cause you to gain weight. Gain too much weight and, well, best you just don’t do that. Alright, well, guess I’ll leave you to it. Best of luck, and try not to die!"
+	elseif level == "level2" then
+		narration = ""
+	end
+
 	layer.update = function(self, dt)
 		if math.abs(speedx) < 0.1 then
 			speedx = 0
@@ -99,6 +109,7 @@ function setupMap(m)
 				object.oy
 			)
 		end
+		love.graphics.printf(narration, 50, screenHeight - 100, screenWidth - 100, 'center')
 	end
 
 	map:removeLayer("sprites")
@@ -111,26 +122,38 @@ function checkEncounters(player)
 			player.x <= sprite.x+sprite.width and
 			player.y+player.sprite:getHeight() >= sprite.y and
 			player.y <= sprite.y+sprite.height then
-				-- print(sprite.properties["Is"])
 				if sprite.properties["Is"] == "enemy" and sprite.talkedTo == false then
 					inEncounter = true
 					setupDialogue(sprite.properties["Dialogue"])
 					gamePhase = "dialogue"
 					sprite.talkedTo = true;
 					break
-				elseif sprite.talkedTo == true then
-					love.graphics.printf("You already talked to this person!", 0,700,800, 'center')
-					break
 				elseif sprite.properties["Is"] == "door" then
-					if level ~= "tutorial" or tutorialComplete == true then
-						level = sprite.properties["LeadsTo"]
-						currMap = setupMap("assets/maps/"..level..".lua")
+					if sprite.name == "homeDoor" then
+						if not clothed == true then
+							narration = "Easy there pal, I get it’s the apocalypse, but we’re not savages. Go put some pants on."
+							break
+						elseif not backpacked == true then
+							narration = "I think you’re forgetting the whole reason you have to leave the house. You know, food. Go get your backpack so you can hold any food you find along the way."
+							break
+						end
+					elseif sprite.name == "tutorialDoor" then
+						if not tutorialComplete == true then
+							break
+						end
 					end
+					level = sprite.properties["LeadsTo"]
+					currMap = setupMap("assets/maps/"..level..".lua")
 					break
 				elseif sprite.properties["Is"] == "maplesyrup" and sprite.talkedTo == false then
 					inventoryAdd("Maple syrup")
 					sprite.talkedTo = true;
 					break
+				elseif sprite.name == "clothes" then
+					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Unfortunately, I cannot read."
+					clothed = true
+				elseif sprite.name == "backpack" then
+					backpacked = true
 				end
 			end
 		end
