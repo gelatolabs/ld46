@@ -14,6 +14,7 @@ end
 function buttonSelector(selection)
 	if selection == 1 then
 		gui:clear()
+		love.graphics.setBackgroundColor(0.71,0.89,1,1)
 		gamePhase = "map"
 	elseif selection == 2 then
 		gamePhase = "storyline"
