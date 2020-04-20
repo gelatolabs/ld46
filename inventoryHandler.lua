@@ -17,7 +17,7 @@ function inventoryRemove(idx)
 
 	hunger = hunger - 1
 	if inventory[idx] == "Maple syrup" then
-		bmi = bmi + 0.2
+		bmi = bmi + 1
 		if bmi >= 26.5 then
 			gamePhase = "gameover"
 		end

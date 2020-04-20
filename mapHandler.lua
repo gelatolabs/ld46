@@ -181,7 +181,7 @@ function checkEncounters(player)
 				elseif sprite.name == "backpack" and not backpacked == true then
 					narration = "Backpack get! Now you can store all the food!"
 					backpacked = true
-				elseif sprite.name == "fridge" then
+				elseif sprite.name == "smeg" then
 					gamePhase = "gameover"
 				end
 			end

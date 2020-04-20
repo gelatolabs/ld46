@@ -71,6 +71,9 @@ function love.draw()
 		elseif love.keyboard.isDown("7") then
 			level = "level5"
 			currMap = setupMap("assets/maps/"..level..".lua")
+		elseif love.keyboard.isDown("8") then
+			level = "level6"
+			currMap = setupMap("assets/maps/"..level..".lua")
 		end
 
 		if not (previousPhase == "map") then
