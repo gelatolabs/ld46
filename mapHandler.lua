@@ -24,8 +24,8 @@ function setupMap(m)
 			sprite = img,
 			x      = sprite.x,
 			y      = sprite.y,
-			ox     = img:getWidth() / 2,
-			oy     = img:getHeight() / 2,
+			ox     = img:getWidth() / 4,
+			oy     = img:getHeight() / 4,
 			width  = img:getWidth(),
 			height = img:getHeight(),
 			talkedTo = false;
@@ -34,8 +34,6 @@ function setupMap(m)
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
 	getItem(layer.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."e.png")
-	getItem(layer.sprites, "player").ox = 8
-	getItem(layer.sprites, "player").oy = 8
 
 	if level == "home" then
 		narration = "Hey look, there you are, all ready to go out on your epic quest. Better put on some clothes and grab your trusty backpack for storing food before you go, you probably won’t be coming back anytime soon."
@@ -104,16 +102,29 @@ function setupMap(m)
 
 	layer.draw = function(self)
 		for _, object in pairs(self.sprites) do
-			love.graphics.draw(
-				object.sprite,
-				math.floor(object.x),
-				math.floor(object.y),
-				0,
-				1,
-				1,
-				object.ox,
-				object.oy
-			)
+			if object.name == "player" then
+				love.graphics.draw(
+					object.sprite,
+					math.floor(object.x),
+					math.floor(object.y),
+					0,
+					1,
+					1,
+					object.ox,
+					object.oy
+				)
+			else
+				love.graphics.draw(
+					object.sprite,
+					math.floor(object.x),
+					math.floor(object.y),
+					0,
+					1,
+					1,
+					0,
+					0
+				)
+			end
 		end
 		local nWidth, nLines = font24:getWrap(narration, screenWidth - 100)
 		local nHeight = (#nLines) * (font24:getHeight() + font24:getLineHeight())
