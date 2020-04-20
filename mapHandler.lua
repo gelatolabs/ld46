@@ -31,6 +31,7 @@ function setupMap(m)
 		}
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
+	getItem(layer.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."e.png")
 
 	if level == "home" then
 		narration = "Hey look, there you are, all ready to go out on your epic quest. Better put on some clothes and grab your trusty backpack for storing food before you go, you probably won’t be coming back anytime soon."
@@ -49,18 +50,22 @@ function setupMap(m)
 		end
 
 		if love.keyboard.isDown("w", "up") then
+			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."n.png")
 			speedy = speedy - 0.2
 			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("s", "down") then
+			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."s.png")
 			speedy = speedy + 0.2
 			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("a", "left") then
+			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."w.png")
 			speedx = speedx - 0.2
 			hunger = hunger + math.random()/200
 		end
 		if love.keyboard.isDown("d", "right") then
+			getItem(self.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."e.png")
 			speedx = speedx + 0.2
 			hunger = hunger + math.random()/200
 		end
@@ -159,6 +164,7 @@ function checkEncounters(player)
 				elseif sprite.name == "clothes" then
 					narration = "Oh hey, looks like your shirt’s got a name tag on it, how handy. Unfortunately, I cannot read."
 					clothed = true
+					playerSprite = "player"
 				elseif sprite.name == "backpack" then
 					narration = "Backpack get!"
 					backpacked = true

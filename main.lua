@@ -11,6 +11,7 @@ require "soundHandler"
 function love.load()
 	gamePhase = "splash"
 	level = "home"
+	playerSprite = "nude"
 	setupMenu()
 	currMap = setupMap("assets/maps/"..level..".lua")
 	setupInventory()
