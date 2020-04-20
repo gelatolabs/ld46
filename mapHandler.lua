@@ -122,19 +122,13 @@ function checkEncounters(player)
 					love.graphics.printf("You already talked to this person!", 0,700,800, 'center')
 				elseif sprite.properties["Is"] == "door" then
 					level = sprite.properties["LeadsTo"]
-				break
+					break
+				elseif sprite.properties["Is"] == "maplesyrup" and sprite.talkedTo == false then
+					inventoryAdd("maplesyrup")
+					sprite.talkedTo = true;
+					break
 				end
 			end
 		end
-	end
-	if love.keyboard.isDown("t") then
-		setupDialogue()
-		gamePhase = "dialogue"
-	end
-	if love.keyboard.isDown("f") then
-		inventoryAdd("poutine")
-	end
-	if love.keyboard.isDown("g") then
-		inventoryAdd("maplesyrup")
 	end
 end

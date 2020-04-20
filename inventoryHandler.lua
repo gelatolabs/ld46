@@ -9,7 +9,7 @@ function setupInventory()
 end
 
 function inventoryAdd(item)
-	inventory[#inventory+1] = item
+	inventory[#inventory+1] = item:gsub('%W', ''):lower()
 	inventoryDraw()
 end
 

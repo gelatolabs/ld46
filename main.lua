@@ -10,7 +10,7 @@ require "soundHandler"
 
 function love.load()
 	gamePhase = "splash"
-	level = "test"
+	level = "tutorial"
 	setupMenu()
 	currMap = setupMap("assets/maps/"..level..".lua")
 	setupInventory()
