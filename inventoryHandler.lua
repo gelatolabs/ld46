@@ -41,8 +41,8 @@ function inventoryDraw()
 		button.tip = item
 	end
 	love.graphics.setFont(font14)
-	local hungerText = gui:text("Hunger: "..hunger.."/10", {x = 0, y = 0, w = screenWidth, h = 25})
-	local bmiText = gui:text("BMI: "..bmi.."/26.5", {x = 0, y = 25, w = screenWidth, h = 25})
+	--local hungerText = gui:text("Hunger: "..hunger.."/10", {x = 0, y = 0, w = screenWidth, h = 25})
+	--local bmiText = gui:text("BMI: "..bmi.."/26.5", {x = 0, y = 25, w = screenWidth, h = 25})
 
 	gui:draw()
 end
