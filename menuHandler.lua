@@ -8,7 +8,7 @@ function setupMenu()
 
 	logo = love.graphics.newImage("assets/ui/logo.png")
 	gameLogo = love.graphics.newImage("assets/ui/theothermaplestory.png")
-	buttons = {"Start", "Story", "Other Shit"}
+	buttons = {"Start", "Story", "Credits"}
 end
 
 function buttonSelector(selection)
@@ -36,28 +36,28 @@ end
 function renderStory()
 	storyBody = 
 		[[
-		The year is 2025. 
+The year is 2025. 
 		
-		Borders between countries are still closed due to the fear of the spread of viral diseases, forcing countries to produce all the things necessary to keep their citizens alive.
+Borders between countries are still closed due to the fear of the spread of viral diseases, forcing countries to produce all the things necessary to keep their citizens alive.
+
+For some countries, this is not a problem, and life carries on as if nothing has changed. But for other countries, this is proving to be quite the problem indeed. 
+	
+Take Canada for instance. It is a widely known fact that Canada’s only food source it can produce in its barren, snowy wastelands, is Maple Syrup. Their only other possible food sources, such as Moose and Cod, having long since been hunted to extinction.
 		
-		For some countries, this is not a problem, and life carries on as if nothing has changed. But for other countries, this is proving to be quite the problem indeed. 
+Now, with the fear of a massive obesity epidemic caused by a diet solely consisting of Maple Syrup, citizens are forced to fight one another for what little healthy food remains.
 		
-		Take Canada for instance. It is a widely known fact that Canada’s only food source it can produce in its barren, snowy wastelands, is Maple Syrup. Their only other possible food sources, such as Moose and Cod, having long since been hunted to extinction.
+There is, however, rumours, that far in the North, beyond the last igloo, there exists a Great Refrigerator that contains enough food to feed a person for many years.
 		
-		Now, with the fear of a massive obesity epidemic caused by a diet solely consisting of Maple Syrup, citizens are forced to fight one another for what little healthy food remains.
+And thus, is where our story begins. With a young Canadian, aboot to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator.
 		
-		There is, however, rumours, that far in the North, beyond the last igloo, there exists a Great Refrigerator that contains enough food to feed a person for many years.
+Will they succeed and find enough food to survive this apocalypse, or will they be forced to succumb to the sweet, sugary goodness that may very well be this country’s undoing?
 		
-		And thus, is where our story begins. With a young Canadian, aboot to venture out into the barren tundra of their home in an attempt to gather what food they can, and make the long and treacherous journey in search of this Great Refrigerator.
+Only time will tell. Perhaps they will find love, or an old friend out there in the tundra. Maybe a lost relative who will bestow upon them some great wisdom of years past. 
 		
-		Will they succeed and find enough food to survive this apocalypse, or will they be forced to succumb to the sweet, sugary goodness that may very well be this country’s undoing?
-		
-		Only time will tell. Perhaps they will find love, or an old friend out there in the tundra. Maybe a lost relative who will bestow upon them some great wisdom of years past. 
-		
-		Or mayhaps a great… Oh, sorry, you probably just want to get to it, right? Yeah, that’s my bad… Anywho, on with the show!
+Or mayhaps a great… Oh, sorry, you probably just want to get to it, right? Yeah, that’s my bad… Anywho, on with the show!
 		]]
 		
-	prettyScroller(storyBody, 2, "menu")
+	prettyScroller(storyBody, 1.5, "menu")
 end
 
 function renderAbout()
@@ -66,49 +66,60 @@ function renderAbout()
 	love.graphics.setNewFont("assets/ui/manrope.ttf",24)
 	abootBody = 
 		[[
-		The Other Maple Story
-		A Gelato Labs Production
-		for Ludum Dare 46
+The Other Maple Story
+A Gelato Labs Production
+for Ludum Dare 46
 		
-		The Gelato Labs 'G-Team' is:
+The Gelato Labs LD46 'G-Team' is:
+
+Programming:
+Kyle 'kfarwell' Farwell
+Matthew 'fireTwoOneNine' Petry
+
+Game Art:
+Matt 'MTRooster' Rose
+Lizzie 'Airessy' Parrish
+
+Game Logo:
+Matthew 'fireTwoOneNine' Petry
+
+Music and Sound:
+Lizzie 'Airessy' Parrish
+Matthew 'fireTwoOneNine' Petry
 		
-		Programming:
-		Kyle 'kfarwell' Farwell
-		Matthew 'fireTwoOneNine' Petry
-		
-		Game Art:
-		Matt 'MTRooster' Rose
-		Lizzie 'Airessy' Parrish
-		
-		Game Logo:
-		Matthew 'fireTwoOneNine' Petry
-		
-		Writing:
-		Matt 'MTRooster' Rose
-		Lizzie 'Airessy' Parrish		
+Writing:
+Matt 'MTRooster' Rose
+Lizzie 'Airessy' Parrish
 		
 		
-		"The Other Maple Story" uses:
+"The Other Maple Story" uses:
+	
+LOVE 11.3 2D framework
+	
+STI (Simple Tiled Implementation)
+by Landon Manning (karai17)
 		
-		LOVE 11.3 2D framework
+bump.lua
+by Enrique García Cota (kikito)
 		
-		STI (Simple Tiled Implementation)
-		by Landon Manning (karai17)
-		
-		bump.lua
-		by Enrique García Cota (kikito)
-		
-		Gspot
-		by trubblegum and Pedro Gimeno Fortea (pgimeno)]]
-	if abootScrollInc > -1400 and not love.keyboard.isDown("space", "return") then
+Gspot
+by trubblegum and Pedro Gimeno Fortea (pgimeno)
+
+
+All assets created for this game are licensed under the ISC License -- see COPYING file for details
+
+See documentation for above listed libraries for respective licensing details.
+
+]]
+	if abootScrollInc > -1600 and not love.keyboard.isDown("space", "return") then
 		love.graphics.printf(abootBody, 100, abootScrollInc ,600, 'center')
-		if (1200 + abootScrollInc) > 250 then
-			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 1200 + abootScrollInc, 0, 0.5, 0.5)
+		if (1600 + abootScrollInc) > 250 then
+			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 1600 + abootScrollInc, 0, 0.5, 0.5)
 		else
 			love.graphics.draw(logo, 400 - (logo:getWidth() / 4), 250, 0, 0.5, 0.5)
 		end
 		abootScrollInc = abootScrollInc - 1
-		love.timer.sleep(0.01)
+		love.timer.sleep(0.015)
 	else 
 		abootScrollInc = 600
 		gamePhase = "menu"

@@ -12,7 +12,7 @@
 -- Simplify version checking
 local version = love._version_major * 10000 + love._version_minor * 100 + love._version_revision
 
-love.graphics.setNewFont("assets/ui/manrope.ttf",14)
+
 
 -- Return the position of the first byte of the given UTF-8 char.
 local function utf8char_begin(s, idx)
@@ -136,7 +136,7 @@ local Gspot = {}
 
 Gspot.style = { -- see Gspot.setComponentMax for colour values
 	unit = 16,
-	font = love.graphics.newFont(10),
+	font = love.graphics.setNewFont("assets/ui/manrope.ttf",20),
 	fg = {},
 	bg = {},
 	labelfg = nil, -- defaults to fg when absent
@@ -181,8 +181,8 @@ Gspot.load = function(this)
 			fg = this.style.fg,
 			bg = this.style.bg,
 			labelfg = this.style.labelfg,
-			default = this.style.default,
-			hilite = this.style.hilite,
+			default = {0.5,0.15,0.15,1},
+			hilite = {0.7,0.2,0.2,1},
 			focus = this.style.focus,
 			hs = this.style.hs or this.style.unit,
 		},
@@ -537,7 +537,7 @@ Gspot.util = {
 		pos = this.Gspot:pos(pos.pos or pos or this.pos)
 		assert(pos:type() == 'Gspot.pos')
 		mode = mode or 'fill'
-		love.graphics.rectangle(mode, pos.x, pos.y, pos.w, pos.h)
+		love.graphics.rectangle(mode, pos.x, pos.y, pos.w, pos.h, pos.w/8, pos.h/8)
 	end,
 
 	setimage = function(this, img)

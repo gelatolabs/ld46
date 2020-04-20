@@ -3,6 +3,7 @@ function setupSound()
 	titleMusic2 = love.audio.newSource("assets/music/title-loop.ogg", "stream")
 	mapleIntro = love.audio.newSource("assets/music/Maple_Syruptitle.wav", "stream")
 	sorryMusic = love.audio.newSource("assets/music/Canadian_Sorry.wav", "stream")
+	wasteMusic = love.audio.newSource("assets/music/WASTELAND.wav", "stream")
 	
 	mapMusic = {sorryMusic}
 	
@@ -33,6 +34,15 @@ function soundManager()
 		end
 		if not titleMusic1:isPlaying() and currentMusic == "storyline" then
 			titleMusic1:play()
+		end		
+	end
+	if gamePhase == "aboot" then
+		if not (currentMusic == "aboot") then
+			currentMusic = "aboot"
+			love.audio.stop()
+		end
+		if not wasteMusic:isPlaying() and currentMusic == "aboot" then
+			wasteMusic:play()
 		end		
 	end
 	if gamePhase == "map" then
