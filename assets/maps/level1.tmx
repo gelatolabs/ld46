@@ -225,13 +225,13 @@
 </data>
  </layer>
  <objectgroup id="8" name="sprites">
-  <object id="5" name="trump" x="621.333" y="400">
+  <object id="5" name="enemy" x="621.333" y="400">
    <properties>
     <property name="Dialogue" type="int" value="1"/>
     <property name="Is" value="enemy"/>
    </properties>
   </object>
-  <object id="6" name="trump" x="654.667" y="494.667">
+  <object id="6" name="enemy" x="654.667" y="494.667">
    <properties>
     <property name="Dialogue" type="int" value="2"/>
     <property name="Is" value="enemy"/>

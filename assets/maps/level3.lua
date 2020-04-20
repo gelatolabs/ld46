@@ -577,7 +577,7 @@ return {
       objects = {
         {
           id = 5,
-          name = "trump",
+          name = "enemy",
           type = "",
           shape = "rectangle",
           x = 621.333,
@@ -590,7 +590,7 @@ return {
         },
         {
           id = 6,
-          name = "trump",
+          name = "enemy",
           type = "",
           shape = "rectangle",
           x = 654.667,

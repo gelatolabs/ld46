@@ -194,7 +194,7 @@ return {
         },
         {
           id = 3,
-          name = "trump",
+          name = "enemy",
           type = "",
           shape = "point",
           x = 613.88,

@@ -100,7 +100,7 @@
   <object id="2" name="player" x="475.082" y="416.395">
    <point/>
   </object>
-  <object id="3" name="trump" x="613.88" y="367.024">
+  <object id="3" name="enemy" x="613.88" y="367.024">
    <properties>
     <property name="Dialogue" type="int" value="1"/>
     <property name="Is" value="enemy"/>
