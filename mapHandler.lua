@@ -32,6 +32,8 @@ function setupMap(m)
 		world:add(sprite, sprite.x, sprite.y, math.floor(img:getWidth() / 2), math.floor(img:getHeight() / 2))
 	end
 	getItem(layer.sprites, "player").sprite = love.graphics.newImage("assets/sprites/"..playerSprite.."e.png")
+	getItem(layer.sprites, "player").ox = 8
+	getItem(layer.sprites, "player").oy = 8
 
 	if level == "home" then
 		narration = "Hey look, there you are, all ready to go out on your epic quest. Better put on some clothes and grab your trusty backpack for storing food before you go, you probably won’t be coming back anytime soon."
