@@ -279,6 +279,77 @@ dialogue = {
 			},
 		},
 	},
+	["level2"] = {
+		[1] = {
+			["intro"] = "Nice day for some ice fishing, eh bud?",
+			["success"] = "You know what bud, have some poutine. A gift, from one ice fishing enthusiast to another.",
+			["fail"] = "Why don't you just go bother someone else, eh?",
+			["minscore"] = 1,
+			["food"] = "poutine",
+			["stages"] = {
+				[1] = {
+					["options"] = {
+						[1] = "Suggest going ice fishing with them later that day",
+						[2] = "Compliment their ice hut",
+						[3] = "Insult the size of their fishing rod",
+					},
+					["responses"] = {
+						[1] = "That'd be great bud, I'll clear my schedule.",
+						[2] = "Thanks bud, my great-great-great grandpa Herb made that there ice hut. Been in the family ever since. I love that ice hut, it's like my best friend.",
+						[3] = "Now just hold up a sec there, ya hoser. It ain't all about the size of yer fishing pole.",
+					},
+					["outcomes"] = {
+						[1] = "positive",
+						[2] = "positive",
+						[3] = "negative",
+					},
+				},
+			},
+		},
+		[2] = {
+			["intro"] = "How's it going there bud, you're looking a bit peckish. Say, how about this. If you guess the outcome of this coin flip I'll give ya some timbits. How's that sound, eh?",
+			["success"] = "Well, rules are rules, here's some timbits.",
+			["fail"] = "Not sure how you screwed this up, bud. This game was literally rigged for you to win and you somehow screwed this up. I got nothin' for ya.",
+			["minscore"] = 1,
+			["food"] = "timbits",
+			["stages"] = {
+				[1] = {
+					["options"] = {
+						[1] = "Heads",
+						[2] = "Tails",
+						[3] = "Tell them this is stupid",
+					},
+					["responses"] = {
+						[1] = "Sorry bud, looks like it's tails. You know what, I'll give you another chance, try again.",
+						[2] = "Sorry bud, looks like it's heads. You know what, I'll give you another chance, try again.",
+						[3] = "Sorry bud, I don't think stupid is a side on a coin, try again.",
+					},
+					["outcomes"] = {
+						[1] = "negative",
+						[2] = "negative",
+						[3] = "negative",
+					},
+				},
+				[2] = {
+					["options"] = {
+						[1] = "Heads",
+						[2] = "Tails",
+						[3] = "Side",
+					},
+					["responses"] = {
+						[1] = "Well look at that, it's heads!",
+						[2] = "Well look at that, it's tails!",
+						[3] = "What in... It really did land on it's side! Well I'll be darned...",
+					},
+					["outcomes"] = {
+						[1] = "positive",
+						[2] = "positive",
+						[3] = "positive",
+					},
+				},
+			},
+		},
+	},
 	["template"] = {
 		[1] = {
 			["intro"] = "",
