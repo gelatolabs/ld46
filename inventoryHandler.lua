@@ -15,7 +15,7 @@ end
 function inventoryRemove(idx)
 	love.audio.play(love.audio.newSource("assets/sounds/eatingnoise.wav", "stream"))
 
-	hunger = hunger - 1
+	hunger = math.max(hunger - 1, 0)
 	if inventory[idx] == "Maple syrup" then
 		bmi = bmi + 1
 		if bmi >= 26.5 then

@@ -70,7 +70,7 @@ function setupMap(m)
 			speedx = speedx + 0.2
 		end
 
-		hunger = hunger + math.random()/150
+		hunger = hunger + math.random()/250
 		if hunger >= 10 then
 			gamePhase = "gameover"
 		end
