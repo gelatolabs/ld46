@@ -16,6 +16,9 @@ function setupMap(m)
 	layer.sprites = {}
 	for _, sprite in pairs(map.objects) do
 		local img = love.graphics.newImage("assets/sprites/"..sprite.name..".png")
+		if sprite.name == "maplesyrup" then
+			img = love.graphics.newImage("assets/sprites/maplesyrupsmol.png")
+		end
 		layer.sprites[sprite.id] = {
 			name   = sprite.name,
 			sprite = img,
