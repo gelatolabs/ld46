@@ -1,4 +1,17 @@
 function love.conf(t)
+	t.releases = {
+		title = 'The Other Maple Story',
+		package = 'theothermaplestory',
+		loveVersion = '11.3',
+		version = '1.0',
+		author = 'Gelato Labs',
+		email = 'hello@gelatolabs.xyz',
+		description = 'The Other Maple Story',
+		homepage = 'https://gelatolabs.itch.io/the-other-maple-story',
+		identifier = 'xyz.gelatolabs.theothermaplestory',
+		releaseDirectory = 'releases',
+	}
+
 	t.title = "The Other Maple Story"				-- The title of the window the game is in (string)
 	t.author = "Gelato Labs"				-- The author of the game (string)
 	t.identity = "Gelato-Labs-LD46"				-- The name of the save directory (string)
