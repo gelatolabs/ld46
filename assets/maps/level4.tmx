@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="8">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="12">
  <editorsettings>
   <export target="level1.lua" format="lua"/>
  </editorsettings>
@@ -182,5 +182,21 @@
     <property name="LeadsTo" value="level5"/>
    </properties>
   </object>
+  <object id="8" name="maplesyrup" x="448" y="1248">
+   <properties>
+    <property name="Is" value="maplesyrup"/>
+   </properties>
+  </object>
+  <object id="9" name="maplesyrup" x="224" y="448">
+   <properties>
+    <property name="Is" value="maplesyrup"/>
+   </properties>
+  </object>
+  <object id="10" name="maplesyrup" x="1216" y="736">
+   <properties>
+    <property name="Is" value="maplesyrup"/>
+   </properties>
+  </object>
+  <object id="11" x="-400" y="906"/>
  </objectgroup>
 </map>

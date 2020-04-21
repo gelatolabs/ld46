@@ -9,7 +9,7 @@ return {
   tilewidth = 32,
   tileheight = 32,
   nextlayerid = 10,
-  nextobjectid = 8,
+  nextobjectid = 12,
   properties = {},
   tilesets = {
     {
@@ -563,6 +563,66 @@ return {
           properties = {
             ["Is"] = "door",
             ["LeadsTo"] = "level2"
+          }
+        },
+        {
+          id = 8,
+          name = "maplesyrup",
+          type = "",
+          shape = "rectangle",
+          x = 1152,
+          y = 1504,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["Is"] = "maplesyrup"
+          }
+        },
+        {
+          id = 9,
+          name = "maplesyrup",
+          type = "",
+          shape = "rectangle",
+          x = 96,
+          y = 416,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["Is"] = "maplesyrup"
+          }
+        },
+        {
+          id = 10,
+          name = "maplesyrup",
+          type = "",
+          shape = "rectangle",
+          x = 1280,
+          y = 224,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["Is"] = "maplesyrup"
+          }
+        },
+        {
+          id = 11,
+          name = "maplesyrup",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 1504,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["Is"] = "maplesyrup"
           }
         }
       }
