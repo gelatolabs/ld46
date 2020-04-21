@@ -521,22 +521,6 @@ return {
           }
         },
         {
-          id = 6,
-          name = "enemy",
-          type = "",
-          shape = "rectangle",
-          x = 1312,
-          y = 832,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["Dialogue"] = 2,
-            ["Is"] = "enemy"
-          }
-        },
-        {
           id = 7,
           name = "player",
           type = "",
@@ -562,7 +546,7 @@ return {
           visible = true,
           properties = {
             ["Is"] = "door",
-            ["LeadsTo"] = "level2"
+            ["LeadsTo"] = "level5"
           }
         }
       }

@@ -551,7 +551,7 @@ return {
         },
         {
           id = 4,
-          name = "pizzaEntrance",
+          name = "door",
           type = "",
           shape = "rectangle",
           x = 768,
@@ -562,7 +562,7 @@ return {
           visible = true,
           properties = {
             ["Is"] = "door",
-            ["LeadsTo"] = "pizza"
+            ["LeadsTo"] = "level3"
           }
         }
       }
