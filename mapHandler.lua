@@ -128,7 +128,7 @@ function setupMap(m)
 		local nWidth, nLines = font24:getWrap(narration, screenWidth - 100)
 		local nHeight = (#nLines) * (font24:getHeight() + font24:getLineHeight())
 		love.graphics.setColor(0.1,0,0,0.5)
-		love.graphics.rectangle("fill", 0, screenHeight - nHeight + ty, screenWidth + tx, nHeight)
+		love.graphics.rectangle("fill", -3000, screenHeight - nHeight + ty, 6000, nHeight)
 		love.graphics.setColor(1,1,1,1)
 		love.graphics.printf(narration, 50 + tx, screenHeight - nHeight + ty, screenWidth - 100, 'center')
 	end
